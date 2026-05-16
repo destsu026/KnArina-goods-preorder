@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🍪 Cookie Shop</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Sriracha&display=swap" rel="stylesheet">
+<!-- ดึงฟอนต์ Itim และ Lora มาจาก Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root { --cream:#fef9f0; --warm:#faecd8; --cookie:#c8873b; --dark:#2b1d0e; --mid:#6b4226; --light:#e8ddd0; --green:#3d6b4a; --red:#c0392b; }
 
-body { font-family:'Sriracha', cursive; background:var(--cream); color:var(--dark); min-height:100vh; display:flex; flex-direction:column; background-attachment: fixed; background-size: cover; background-position: center; transition: background-color 0.3s, background-image 0.5s; }
+/* ใช้ฟอนต์ Itim เป็นฟอนต์หลักของเว็บ */
+body { font-family:'Itim', cursive; background:var(--cream); color:var(--dark); min-height:100vh; display:flex; flex-direction:column; background-attachment: fixed; background-size: cover; background-position: center; transition: background-color 0.3s, background-image 0.5s; font-size: 1.05rem; }
 
 .page { display:none; flex: 1; }
 .page.active { display:block; }
@@ -23,10 +25,10 @@ body { font-family:'Sriracha', cursive; background:var(--cream); color:var(--dar
 .header { text-align:center; margin-bottom:30px; animation:fadeUp 0.5s ease both; }
 .header h1 { font-family:'Lora', serif; font-size:2.2rem; line-height:1.2; margin-bottom:10px; }
 .header h1 em { font-style:italic; color:var(--cookie); }
-.header p { font-size:0.95rem; color:var(--mid); line-height:1.6; white-space:pre-wrap; }
-.section-label { font-size:0.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--cookie); margin-bottom:12px; }
+.header p { font-size:1rem; color:var(--mid); line-height:1.6; white-space:pre-wrap; }
+.section-label { font-size:0.9rem; letter-spacing:1px; text-transform:uppercase; color:var(--cookie); margin-bottom:12px; }
 
-#closedBanner { display:none; background:var(--warm); color:var(--red); border:1.5px dashed var(--red); padding:20px; border-radius:14px; text-align:center; margin-bottom:20px; font-weight:600; }
+#closedBanner { display:none; background:var(--warm); color:var(--red); border:1.5px dashed var(--red); padding:20px; border-radius:14px; text-align:center; margin-bottom:20px; font-size: 1.1rem; }
 
 .items-list { display:flex; flex-direction:column; gap:12px; margin-bottom:28px; }
 .item-row { background:#fff; border:1.5px solid var(--light); border-radius:16px; padding:12px; display:flex; align-items:center; gap:14px; cursor:pointer; transition:all 0.2s; animation:fadeUp 0.4s ease both; }
@@ -34,60 +36,60 @@ body { font-family:'Sriracha', cursive; background:var(--cream); color:var(--dar
 .item-row.selected { border-color:var(--cookie); background:#fffbf5; box-shadow:0 2px 12px rgba(0,0,0,0.08); }
 .item-img { width:75px; height:75px; object-fit:cover; border-radius:12px; flex-shrink:0; background:var(--warm); display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
 .item-info { flex:1; }
-.item-info strong { display:block; font-size:1rem; font-weight:700; margin-bottom:3px; }
-.item-info span { font-size:0.85rem; color:var(--mid); line-height:1.3; display:block; }
-.item-price { font-weight:700; color:var(--cookie); font-size:1rem; }
+.item-info strong { display:block; font-size:1.1rem; margin-bottom:3px; }
+.item-info span { font-size:0.9rem; color:var(--mid); line-height:1.3; display:block; }
+.item-price { color:var(--cookie); font-size:1.1rem; }
 
 .qty-wrap { display:none; align-items:center; gap:8px; margin-top:8px; }
 .item-row.selected .qty-wrap { display:flex; }
-.qbtn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--cookie); background:none; color:var(--cookie); font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.qbtn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--cookie); background:none; color:var(--cookie); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
 .qbtn:hover { background:var(--cookie); color:#fff; }
-.qnum { min-width:20px; text-align:center; font-weight:700; font-size:1rem; }
+.qnum { min-width:20px; text-align:center; font-size:1.1rem; }
 
 .form-section { background:#fff; border-radius:20px; padding:24px 20px; margin-bottom:18px; border:1.5px solid var(--light); animation:fadeUp 0.5s ease 0.2s both; }
 .field { margin-bottom:16px; }
-.field label { display:block; font-size:0.8rem; font-weight:700; color:var(--mid); margin-bottom:6px; }
-input, textarea, select { width:100%; padding:12px; border:1.5px solid #e8ddd0; border-radius:10px; font-family:'Sriracha', cursive; font-size:0.95rem; background:var(--cream); outline:none; transition:0.2s; }
+.field label { display:block; font-size:0.95rem; color:var(--mid); margin-bottom:6px; }
+input, textarea, select { width:100%; padding:12px; border:1.5px solid #e8ddd0; border-radius:10px; font-family:'Itim', cursive; font-size:1rem; background:var(--cream); outline:none; transition:0.2s; }
 input:focus, textarea:focus, select:focus { border-color:var(--cookie); background:#fff; }
 
-.btn { width:100%; padding:16px; border-radius:12px; font-family:''Sriracha', cursive; font-weight:700; font-size:1.05rem; cursor:pointer; transition:0.2s; margin-bottom:10px; border:none; text-align:center; }
+.btn { width:100%; padding:16px; border-radius:12px; font-family:'Itim', cursive; font-size:1.15rem; cursor:pointer; transition:0.2s; margin-bottom:10px; border:none; text-align:center; }
 .btn-primary { background:var(--cookie); color:#fff; }
 .btn-primary:hover { filter:brightness(0.9); transform:translateY(-2px); }
 .btn-primary:disabled { background:#ccc; cursor:not-allowed; }
 .btn-secondary { background:none; color:var(--mid); border:1.5px solid var(--light); }
 .btn-secondary:hover { border-color:var(--cookie); color:var(--cookie); }
-.btn-small { padding:8px 12px; font-size:0.85rem; border-radius:8px; }
+.btn-small { padding:8px 12px; font-size:0.9rem; border-radius:8px; }
 
 .r-box { background:#fff; border:1.5px dashed var(--cookie); border-radius:16px; padding:20px; margin-bottom:20px; }
-.r-item, .r-shipping { display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.95rem; }
+.r-item, .r-shipping { display:flex; justify-content:space-between; margin-bottom:10px; font-size:1.05rem; }
 .r-shipping { color:var(--mid); border-bottom:1px solid var(--light); padding-bottom:10px; }
-.r-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.15rem; color:var(--cookie); margin-top:10px; padding-top:10px; }
+.r-total { display:flex; justify-content:space-between; font-size:1.25rem; color:var(--cookie); margin-top:10px; padding-top:10px; }
 
 .admin-login-box { background:#fff; padding:30px; border-radius:20px; border:1.5px solid var(--light); text-align:center; margin-top:40px; }
 .nav-bar { display:flex; gap:8px; margin-bottom:24px; overflow-x:auto; padding-bottom:5px; }
-.nav-btn { flex:1; min-width:100px; padding:10px; border-radius:10px; background:#fff; border:1.5px solid var(--light); font-weight:700; font-size:0.85rem; color:var(--mid); cursor:pointer; text-align:center; white-space:nowrap; }
+.nav-btn { flex:1; min-width:100px; padding:10px; border-radius:10px; background:#fff; border:1.5px solid var(--light); font-size:1rem; color:var(--mid); cursor:pointer; text-align:center; white-space:nowrap; }
 .nav-btn.active { background:var(--dark); color:#fff; border-color:var(--dark); }
 .admin-tab-content { display:none; }
 .admin-tab-content.active { display:block; animation:fadeUp 0.3s ease both; }
 
 .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
 .stat-card { background:#fff; border:1.5px solid var(--light); border-radius:14px; padding:20px; text-align:center; }
-.stat-card h3 { font-size:0.8rem; color:var(--mid); text-transform:uppercase; margin-bottom:8px; }
-.stat-card .val { font-size:1.8rem; font-family:'Lora',serif; font-weight:700; color:var(--cookie); }
+.stat-card h3 { font-size:0.9rem; color:var(--mid); text-transform:uppercase; margin-bottom:8px; }
+.stat-card .val { font-size:1.8rem; font-family:'Lora',serif; color:var(--cookie); }
 
 .order-card { background:#fff; border:1.5px solid var(--light); border-radius:14px; padding:18px; margin-bottom:14px; position:relative; }
-.order-card .time { position:absolute; top:18px; right:18px; font-size:0.75rem; color:#bba990; }
-.order-card .name { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:4px; }
-.order-card .phone { font-size:0.85rem; color:var(--mid); margin-bottom:12px; }
-.order-card .address { background:var(--cream); padding:10px; border-radius:8px; font-size:0.85rem; margin-bottom:12px; border:1px solid var(--light); }
-.order-card .items { font-size:0.85rem; border-top:1px solid var(--light); padding-top:10px; margin-top:4px; line-height:1.6; }
+.order-card .time { position:absolute; top:18px; right:18px; font-size:0.85rem; color:#bba990; font-family:sans-serif; }
+.order-card .name { font-family:'Lora',serif; font-size:1.2rem; font-weight:600; margin-bottom:4px; }
+.order-card .phone { font-size:0.95rem; color:var(--mid); margin-bottom:12px; }
+.order-card .address { background:var(--cream); padding:10px; border-radius:8px; font-size:0.95rem; margin-bottom:12px; border:1px solid var(--light); }
+.order-card .items { font-size:0.95rem; border-top:1px solid var(--light); padding-top:10px; margin-top:4px; line-height:1.6; }
 
 .edit-menu-row { background:#fff; border:1.5px solid var(--light); border-radius:12px; padding:16px; margin-bottom:16px; display:grid; grid-template-columns:80px 1fr 100px; gap:12px; align-items:start;}
 .img-upload-box { text-align:center; }
 .img-preview { width:80px; height:80px; object-fit:cover; border-radius:10px; background:var(--warm); margin-bottom:8px; border:1px solid var(--light); }
-.del-btn { background:var(--cream); color:var(--red); border:1px solid #f5b7b1; padding:8px; border-radius:8px; cursor:pointer; font-weight:700; font-size:0.85rem; margin-top:4px;}
+.del-btn { background:var(--cream); color:var(--red); border:1px solid #f5b7b1; padding:8px; border-radius:8px; cursor:pointer; font-size:0.95rem; margin-top:4px; font-family:'Itim', cursive;}
 
-footer { text-align:center; padding:20px; font-size:0.8rem; margin-top:auto; background:rgba(255,255,255,0.7); backdrop-filter:blur(5px); }
+footer { text-align:center; padding:20px; font-size:0.9rem; margin-top:auto; background:rgba(255,255,255,0.7); backdrop-filter:blur(5px); border-radius: 20px 20px 0 0; }
 footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:bold; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 </style>
@@ -110,10 +112,10 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
     <div class="items-list" id="menuList"></div>
     <div class="form-section">
       <div class="section-label">2. Your details</div>
-      <div class="field"><label>ชื่อ-นามสกุล *</label><input type="text" id="fname" placeholder="Your name"></div>
-      <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="fphone" placeholder="Contact number"></div>
-      <div class="field"><label>ที่อยู่จัดส่ง *</label><textarea id="faddress" placeholder="Full address"></textarea></div>
-      <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="e.g. Allergies, gifts..."></div>
+      <div class="field"><label>ชื่อ-นามสกุล *</label><input type="text" id="fname" placeholder="ชื่อของคุณลูกค้า"></div>
+      <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="fphone" placeholder="ช่องทางการติดต่อ"></div>
+      <div class="field"><label>ที่อยู่จัดส่ง *</label><textarea id="faddress" placeholder="บ้านเลขที่ ถนน ซอย ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea></div>
+      <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="เช่น แพ้ถั่ว, ฝากเขียนการ์ด..."></div>
     </div>
     <button class="btn btn-primary" onclick="goToReview()">Review Order ✦</button>
   </div>
@@ -124,27 +126,27 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <div class="r-box">
     <div class="section-label">Summary</div>
     <div id="reviewItems" style="margin-bottom:10px;"></div>
-    <div class="r-shipping"><span>Subtotal</span><span id="reviewSubtotal">฿0</span></div>
-    <div class="r-shipping" style="border:none;"><span>Shipping Fee</span><span id="reviewShipping">฿0</span></div>
-    <div class="r-total"><span>Grand Total</span><span id="reviewTotal">฿0</span></div>
+    <div class="r-shipping"><span>ค่าสินค้า (Subtotal)</span><span id="reviewSubtotal">฿0</span></div>
+    <div class="r-shipping" style="border:none;"><span>ค่าจัดส่ง (Shipping Fee)</span><span id="reviewShipping">฿0</span></div>
+    <div class="r-total"><span>ยอดรวมทั้งหมด (Grand Total)</span><span id="reviewTotal">฿0</span></div>
     <div class="section-label" style="margin-top:25px;">Delivery To</div>
-    <div id="reviewContact" style="font-weight:700; font-size:0.95rem;"></div>
-    <div id="reviewAddress" style="font-size:0.85rem; color:var(--mid); margin-top:5px; line-height:1.5;"></div>
+    <div id="reviewContact" style="font-size:1.1rem;"></div>
+    <div id="reviewAddress" style="font-size:0.95rem; color:var(--mid); margin-top:5px; line-height:1.5;"></div>
   </div>
   <button class="btn btn-primary" id="btnConfirm" onclick="confirmOrder()">Confirm & Place Order</button>
-  <button class="btn btn-secondary" onclick="showPage('orderPage')">Back to Edit</button>
+  <button class="btn btn-secondary" onclick="showPage('orderPage')">กลับไปแก้ไข</button>
 </div>
 
 <div id="thankPage" class="page container" style="text-align:center; padding-top:80px;">
   <div style="font-size:4rem; margin-bottom:10px;">🤎</div>
   <h2 style="font-family:'Lora'; margin-bottom:10px;">Order Received!</h2>
-  <p style="color:var(--mid); margin-bottom:30px;">ขอบคุณสำหรับออเดอร์นะคะ แม่ค้าจะรีบติดต่อกลับไปค่ะ ✨</p>
-  <button class="btn btn-secondary" onclick="resetForm()">Order Again</button>
+  <p style="color:var(--mid); margin-bottom:30px; font-size:1.1rem;">ได้รับออเดอร์เรียบร้อยแล้วค่ะ<br>เดี๋ยวแม่ค้าจะรีบติดต่อกลับไปนะคะ ✨</p>
+  <button class="btn btn-secondary" onclick="resetForm()">สั่งซื้อเพิ่มอีก</button>
 </div>
 
 <div id="adminLoginPage" class="page container">
   <div class="admin-login-box">
-    <h2>Admin Access</h2>
+    <h2 style="font-family: 'Lora';">Admin Access</h2>
     <div class="field" style="margin-top:20px;">
       <input type="password" id="adminPin" placeholder="Enter PIN" style="text-align:center;">
     </div>
@@ -180,31 +182,25 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
     <div class="form-section">
       <div class="section-label">Shop Settings</div>
       <div class="field">
-        <label>Shop Status</label>
+        <label>สถานะร้าน (Shop Status)</label>
         <select id="setIsOpen"><option value="true">🟢 OPEN (เปิดรับออเดอร์)</option><option value="false">🔴 CLOSED (ปิดรับออเดอร์)</option></select>
       </div>
-      <div class="field"><label>Shop Name</label><input type="text" id="setShopName"></div>
-      <div class="field"><label>Welcome Description</label><textarea id="setShopDesc"></textarea></div>
+      <div class="field"><label>ชื่อร้าน (Shop Name)</label><input type="text" id="setShopName"></div>
+      <div class="field"><label>คำอธิบายหน้าร้าน (Welcome Description)</label><textarea id="setShopDesc"></textarea></div>
       <div class="field"><label>ค่าจัดส่ง (฿)</label><input type="number" id="setShippingFee"></div>
     </div>
 
-    <!-- 🌟 ส่วนอัปโหลดสีและภาพพื้นหลังที่อัปเกรดใหม่ 🌟 -->
     <div class="form-section">
       <div class="section-label">Theme & Background Design</div>
       <div class="field">
         <label>Theme Color (คลิกเพื่อเลือกสี)</label>
-        <input type="color" id="setThemeColor" style="height:50px; cursor:pointer;">
+        <input type="color" id="setThemeColor" style="height:50px; cursor:pointer; padding: 5px;">
       </div>
       <div class="field">
-        <label>Background Image (อัปโหลด หรือ วางลิงก์เพื่อความคมชัด 100%)</label>
+        <label>ภาพพื้นหลัง (วางลิงก์รูป หรือ อัปโหลดจากเครื่อง)</label>
         <img id="bgPreview" style="width:100%; max-height:200px; object-fit:cover; display:none; border-radius:10px; margin-bottom:10px; border:1px solid #ccc; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
-        
-        <!-- ช่องใส่ลิงก์รูปภาพ -->
-        <input type="text" id="setBgImage" placeholder="วางลิงก์รูป (URL) ที่นี่ หรืออัปโหลดไฟล์ด้านล่าง" style="margin-bottom:8px;" oninput="updateBgPreview()">
-        
-        <!-- ปุ่มอัปโหลดแบบ WEBP 1920px -->
-        <input type="file" id="bgFileInput" accept="image/*" style="font-size: 0.8rem;" onchange="compressBgImage(event)">
-        
+        <input type="text" id="setBgImage" placeholder="วางลิงก์รูปลงที่นี่ หรือกดเลือกไฟล์ด้านล่าง..." style="margin-bottom:8px;" oninput="updateBgPreview()">
+        <input type="file" id="bgFileInput" accept="image/*" style="font-size: 0.9rem;" onchange="compressBgImage(event)">
         <button class="btn btn-secondary btn-small" style="margin-top:10px;" onclick="clearBgImage()">🗑️ ลบรูปพื้นหลัง</button>
       </div>
     </div>
@@ -223,9 +219,9 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 
 <script>
 // ════════════════════════════════════════════════════════════
-// ⚠️ อย่าลืมใส่ API URL อันเดิมของคุณเบลล์ตรงนี้นะคะ!
-const API_URL = "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec"; 
-const ADMIN_PIN = "admin8616";
+// ⚠️ ใส่ลิงก์ Web App URL ของคุณเบลล์ที่นี่ค่ะ
+const API_URL = "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้"; 
+const ADMIN_PIN = "admin1234";
 // ════════════════════════════════════════════════════════════
 
 let SHOP_SETTINGS = {};
@@ -236,7 +232,7 @@ let currentOrder = null;
 
 window.onload = () => {
   if (API_URL === "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้") {
-    alert("โปรดใส่ลิงก์ API_URL ในโค้ดก่อนใช้งานค่ะ");
+    alert("อย่าลืมนำ API_URL จาก Google Apps Script มาใส่ในโค้ดนะคะ 🤎");
     document.getElementById('loadingScreen').style.display = 'none';
     return;
   }
@@ -380,7 +376,7 @@ function confirmOrder() {
     btn.textContent = "Confirm & Place Order";
     showPage('thankPage');
   }).catch(() => {
-    alert("บันทึกข้อมูลเรียบร้อย (ทำงานแบบออฟไลน์)");
+    alert("ระบบออฟไลน์: บันทึกข้อมูลเรียบร้อยแล้ว");
     showPage('thankPage');
   });
 }
@@ -410,7 +406,7 @@ function switchAdminTab(tabId, btnEl) {
 }
 
 function loadAdminData() {
-  document.getElementById('adminOrdersList').innerHTML = "Loading...";
+  document.getElementById('adminOrdersList').innerHTML = "กำลังโหลดข้อมูล...";
   fetch(`${API_URL}?action=getAdminData`)
     .then(res => res.json())
     .then(data => {
@@ -432,8 +428,8 @@ function loadAdminData() {
             <div class="phone">📞 ${o.phone}</div>
             <div class="address">${o.address.replace(/\n/g,'<br>')}</div>
             <div class="items">${o.items}</div>
-            <div style="font-weight:700; color:var(--cookie); margin-top:10px;">Grand Total: ฿${o.total.toLocaleString()}</div>
-            ${o.notes ? `<div style="font-size:0.8rem; color:#888; margin-top:5px;">📝 ${o.notes}</div>` : ''}
+            <div style="font-size:1.1rem; color:var(--cookie); margin-top:10px;">Grand Total: ฿${o.total.toLocaleString()}</div>
+            ${o.notes ? `<div style="font-size:0.9rem; color:#888; margin-top:5px;">📝 ${o.notes}</div>` : ''}
           </div>
         `).join('');
       }
@@ -457,7 +453,6 @@ function loadAdminData() {
     });
 }
 
-// 🌟 พรีวิวรูปพื้นหลังทันทีเมื่อพิมพ์ลิงก์
 function updateBgPreview() {
   const val = document.getElementById('setBgImage').value;
   if(val) {
@@ -468,35 +463,26 @@ function updateBgPreview() {
   }
 }
 
-// 🌟 ระบบย่อรูปภาพพื้นหลังใหม่ (1920px WEBP 85%)
 function compressBgImage(event) {
   const file = event.target.files[0];
   if(!file) return;
-  
-  document.getElementById('bgPreview').style.display = 'none'; // ซ่อนรูปเดิมก่อน
-  
+  document.getElementById('bgPreview').style.display = 'none';
   const reader = new FileReader();
   reader.onload = function(e) {
     const img = new Image();
     img.onload = function() {
       const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 1920; // 🌟 ขยายเพื่อรองรับจอ Full HD
+      const MAX_WIDTH = 1920; 
       let scaleSize = 1;
-      if (img.width > MAX_WIDTH) {
-          scaleSize = MAX_WIDTH / img.width;
-      }
+      if (img.width > MAX_WIDTH) scaleSize = MAX_WIDTH / img.width;
       canvas.width = img.width * scaleSize;
       canvas.height = img.height * scaleSize;
-      
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      
-      // 🌟 ใช้ WEBP ช่วยคงความคมชัด แต่ไฟล์เบากว่า JPEG เดิมมาก
       const dataUrl = canvas.toDataURL('image/webp', 0.85);
-      
       document.getElementById('bgPreview').src = dataUrl;
       document.getElementById('bgPreview').style.display = 'block';
-      document.getElementById('setBgImage').value = dataUrl; // นำไปใส่ในช่อง Text
+      document.getElementById('setBgImage').value = dataUrl;
     }
     img.src = e.target.result;
   }
@@ -517,17 +503,17 @@ function renderMenuEditor() {
     <div class="edit-menu-row">
       <div class="img-upload-box">
         <img src="${imgSrc}" class="img-preview" id="preview-${index}">
-        <input type="file" style="width:100%; font-size:0.65rem;" accept="image/*" onchange="compressAndPreview(event, ${index})">
+        <input type="file" style="width:100%; font-size:0.8rem; margin-top:5px;" accept="image/*" onchange="compressAndPreview(event, ${index})">
         <input type="hidden" class="m-image" id="b64-${index}" value="${m.image || ''}">
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <input type="text" placeholder="Menu Name" value="${m.name}" class="m-name" style="padding:8px;">
-        <input type="text" placeholder="Description..." value="${m.desc}" class="m-desc" style="padding:8px;">
+        <input type="text" placeholder="ชื่อเมนู" value="${m.name}" class="m-name" style="padding:8px;">
+        <input type="text" placeholder="คำอธิบาย..." value="${m.desc}" class="m-desc" style="padding:8px;">
         <input type="hidden" value="${m.id}" class="m-id">
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <input type="number" placeholder="Price" value="${m.price}" class="m-price" style="width:100%; padding:8px;">
-        <button class="del-btn" onclick="removeMenuItem(${index})">Remove</button>
+        <input type="number" placeholder="ราคา" value="${m.price}" class="m-price" style="width:100%; padding:8px;">
+        <button class="del-btn" onclick="removeMenuItem(${index})">ลบเมนูนี้</button>
       </div>
     </div>
     `;
@@ -542,13 +528,13 @@ function compressAndPreview(event, index) {
     const img = new Image();
     img.onload = function() {
       const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 400; // เพิ่มขนาดรูปเมนูคุกกี้ให้ชัดขึ้นเล็กน้อย
+      const MAX_WIDTH = 400; 
       const scaleSize = MAX_WIDTH / img.width;
       canvas.width = MAX_WIDTH;
       canvas.height = img.height * scaleSize;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL('image/webp', 0.85); // ใช้ Webp เหมือนกัน
+      const dataUrl = canvas.toDataURL('image/webp', 0.85); 
       document.getElementById('preview-' + index).src = dataUrl;
       document.getElementById('b64-' + index).value = dataUrl;
     }
@@ -563,7 +549,7 @@ function addMenuItem() {
 }
 
 function removeMenuItem(index) {
-  if(confirm("Delete this menu item?")) {
+  if(confirm("แน่ใจหรือไม่ที่จะลบเมนูนี้?")) {
     MENU.splice(index, 1);
     renderMenuEditor();
   }
@@ -572,7 +558,7 @@ function removeMenuItem(index) {
 function saveAdminSettings() {
   const btn = document.getElementById('btnSaveAdmin');
   btn.disabled = true;
-  btn.textContent = "Saving...";
+  btn.textContent = "กำลังบันทึก...";
 
   const newSettings = {
     isOpen: document.getElementById('setIsOpen').value === "true",
