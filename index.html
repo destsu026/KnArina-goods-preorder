@@ -137,10 +137,29 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <button class="btn btn-secondary" onclick="showPage('orderPage')">กลับไปแก้ไข</button>
 </div>
 
-<div id="thankPage" class="page container" style="text-align:center; padding-top:80px;">
+<!-- 🌟 หน้า THANK YOU PAGE (ฉบับอัปเดตใช้ TipMe) 🌟 -->
+<div id="thankPage" class="page container" style="text-align:center; padding-top:40px;">
   <div style="font-size:4rem; margin-bottom:10px;">🤎</div>
   <h2 style="font-family:'Lora'; margin-bottom:10px;">Order Received!</h2>
-  <p style="color:var(--mid); margin-bottom:30px; font-size:1.1rem;">ได้รับออเดอร์เรียบร้อยแล้วค่ะ<br>เดี๋ยวแม่ค้าจะรีบติดต่อกลับไปนะคะ ✨</p>
+  <p style="color:var(--mid); margin-bottom:20px; font-size:1.25rem; font-weight:600;">ได้รับออเดอร์แล้ว ขอบคุณที่อุดหนุนอารินะนะคะ♥</p>
+
+  <div class="r-box" style="text-align:center; padding: 25px 20px;">
+    <div style="border-bottom:1px solid var(--light); padding-bottom:15px; margin-bottom:15px;">
+      <div style="font-size:1rem; color:var(--mid); margin-bottom:5px;">ยอดชำระเงินทั้งหมด</div>
+      <div id="thankYouTotal" style="font-size:2.5rem; color:var(--cookie); font-family:'Lora',serif;">฿0</div>
+    </div>
+
+    <div style="font-size:1.1rem; line-height:1.6; color:var(--dark);">
+      <strong>💳 ช่องทางการชำระเงิน</strong><br>
+      <span style="font-size:0.95rem; color:var(--mid);">สามารถโอนผ่าน TipMe ได้ที่ลิงก์นี้เลยค่ะ:</span><br>
+      <a href="https://tipme.in.th/k-arina" target="_blank" style="color:var(--cookie); font-weight:bold; font-size:1.15rem; text-decoration:underline; display:inline-block; margin-top:10px;">
+        https://tipme.in.th/k-arina
+      </a>
+    </div>
+
+    <a href="https://tipme.in.th/k-arina" target="_blank" class="btn btn-primary" style="display:block; text-decoration:none; margin-top:20px;">คลิกเพื่อชำระเงิน ↗</a>
+  </div>
+
   <button class="btn btn-secondary" onclick="resetForm()">สั่งซื้อเพิ่มอีก</button>
 </div>
 
