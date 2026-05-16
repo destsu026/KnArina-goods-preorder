@@ -13,39 +13,38 @@ body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--dar
 .page { display:none; flex: 1; }
 .page.active { display:block; }
 .container { max-width:560px; margin:0 auto; padding:40px 20px 60px; width: 100%; }
-.container-large { max-width:700px; margin:0 auto; padding:30px 20px 60px; width: 100%; }
+.container-large { max-width:800px; margin:0 auto; padding:30px 20px 60px; width: 100%; }
 
-/* LOADING SCREEN */
+/* LOADING */
 #loadingScreen { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--cream); z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; }
 .spinner { font-size:3rem; animation:spin 1.5s linear infinite; margin-bottom:15px; }
 @keyframes spin { 100% { transform:rotate(360deg); } }
 
-/* HEADER & TYPOGRAPHY */
+/* HEADER */
 .header { text-align:center; margin-bottom:30px; animation:fadeUp 0.5s ease both; }
 .header h1 { font-family:'Lora',serif; font-size:2.2rem; line-height:1.2; margin-bottom:10px; }
 .header h1 em { font-style:italic; color:var(--cookie); }
 .header p { font-size:0.9rem; color:var(--mid); line-height:1.6; white-space:pre-wrap; }
 .section-label { font-size:0.75rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--cookie); margin-bottom:12px; }
 
-/* STORE CLOSED BANNER */
 #closedBanner { display:none; background:var(--warm); color:var(--red); border:1.5px dashed var(--red); padding:20px; border-radius:14px; text-align:center; margin-bottom:20px; font-weight:600; }
 
-/* ITEMS & FORMS */
-.items-list { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
-.item-row { background:#fff; border:1.5px solid var(--light); border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:14px; cursor:pointer; transition:all 0.2s; animation:fadeUp 0.4s ease both; }
+/* MENU ITEMS WITH IMAGE */
+.items-list { display:flex; flex-direction:column; gap:12px; margin-bottom:28px; }
+.item-row { background:#fff; border:1.5px solid var(--light); border-radius:16px; padding:12px; display:flex; align-items:center; gap:14px; cursor:pointer; transition:all 0.2s; animation:fadeUp 0.4s ease both; }
 .item-row:hover { border-color:var(--cookie); }
 .item-row.selected { border-color:var(--cookie); background:#fffbf5; box-shadow:0 2px 12px rgba(200,135,59,0.12); }
-.item-emoji { font-size:1.6rem; }
+.item-img { width:75px; height:75px; object-fit:cover; border-radius:12px; flex-shrink:0; background:var(--warm); display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:#d4c4b2; }
 .item-info { flex:1; }
-.item-info strong { display:block; font-size:0.95rem; font-weight:700; }
-.item-info span { font-size:0.8rem; color:var(--mid); }
-.item-price { font-weight:700; color:var(--cookie); font-size:0.9rem; }
+.item-info strong { display:block; font-size:0.95rem; font-weight:700; margin-bottom:3px; }
+.item-info span { font-size:0.8rem; color:var(--mid); line-height:1.3; display:block; }
+.item-price { font-weight:700; color:var(--cookie); font-size:0.95rem; }
 
-.qty-wrap { display:none; align-items:center; gap:8px; }
+.qty-wrap { display:none; align-items:center; gap:8px; margin-top:8px; }
 .item-row.selected .qty-wrap { display:flex; }
-.qbtn { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--cookie); background:none; color:var(--cookie); font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.qbtn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--cookie); background:none; color:var(--cookie); font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 .qbtn:hover { background:var(--cookie); color:#fff; }
-.qnum { min-width:18px; text-align:center; font-weight:700; font-size:0.9rem; }
+.qnum { min-width:20px; text-align:center; font-weight:700; font-size:0.95rem; }
 
 .form-section { background:#fff; border-radius:20px; padding:24px 20px; margin-bottom:18px; border:1.5px solid var(--light); animation:fadeUp 0.5s ease 0.2s both; }
 .field { margin-bottom:16px; }
@@ -65,10 +64,11 @@ textarea { resize:vertical; min-height:80px; }
 
 /* REVIEW PAGE */
 .r-box { background:#fff; border:1.5px dashed var(--cookie); border-radius:16px; padding:20px; margin-bottom:20px; }
-.r-item { display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.95rem; }
-.r-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; color:var(--cookie); margin-top:10px; padding-top:10px; border-top:1px solid var(--light); margin-bottom:20px;}
+.r-item { display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.95rem; }
+.r-shipping { display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.95rem; color:var(--mid); border-bottom:1px solid var(--light); padding-bottom:10px; }
+.r-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.15rem; color:var(--cookie); margin-top:10px; padding-top:10px; }
 
-/* ADMIN DASHBOARD */
+/* ADMIN */
 .admin-login-box { background:#fff; padding:30px; border-radius:20px; border:1.5px solid var(--light); text-align:center; margin-top:40px; }
 .nav-bar { display:flex; gap:8px; margin-bottom:24px; overflow-x:auto; padding-bottom:5px; }
 .nav-btn { flex:1; min-width:100px; padding:10px; border-radius:10px; background:#fff; border:1.5px solid var(--light); font-weight:700; font-size:0.85rem; color:var(--mid); cursor:pointer; text-align:center; white-space:nowrap; }
@@ -76,13 +76,11 @@ textarea { resize:vertical; min-height:80px; }
 .admin-tab-content { display:none; }
 .admin-tab-content.active { display:block; animation:fadeUp 0.3s ease both; }
 
-/* STATS */
 .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
 .stat-card { background:#fff; border:1.5px solid var(--light); border-radius:14px; padding:20px; text-align:center; }
 .stat-card h3 { font-size:0.8rem; color:var(--mid); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
 .stat-card .val { font-size:1.8rem; font-family:'Lora',serif; font-weight:700; color:var(--cookie); }
 
-/* ORDER CARD */
 .order-card { background:#fff; border:1.5px solid var(--light); border-radius:14px; padding:18px; margin-bottom:14px; position:relative; }
 .order-card .time { position:absolute; top:18px; right:18px; font-size:0.75rem; color:#bba990; }
 .order-card .name { font-family:'Lora',serif; font-size:1.1rem; font-weight:700; margin-bottom:4px; }
@@ -90,11 +88,14 @@ textarea { resize:vertical; min-height:80px; }
 .order-card .address { background:var(--warm); padding:10px; border-radius:8px; font-size:0.85rem; margin-bottom:12px; }
 .order-card .items { font-size:0.85rem; border-top:1px solid var(--light); padding-top:10px; margin-top:4px; line-height:1.6; }
 
-/* MENU EDITOR */
-.edit-menu-row { background:#fff; border:1.5px solid var(--light); border-radius:12px; padding:14px; margin-bottom:12px; display:grid; grid-template-columns:50px 1fr 80px; gap:10px; align-items:center;}
-.edit-menu-row input { padding:8px; font-size:0.9rem; }
-.edit-menu-row .full-width { grid-column: 1 / -1; }
-.del-btn { background:var(--warm); color:var(--red); border:none; padding:8px; border-radius:8px; cursor:pointer; font-weight:700; font-size:0.8rem; width:100%;}
+/* MENU EDITOR WITH IMAGE */
+.edit-menu-row { background:#fff; border:1.5px solid var(--light); border-radius:12px; padding:16px; margin-bottom:16px; display:grid; grid-template-columns:80px 1fr 100px; gap:12px; align-items:start;}
+.img-upload-box { text-align:center; }
+.img-preview { width:80px; height:80px; object-fit:cover; border-radius:10px; background:var(--warm); margin-bottom:8px; border:1px solid var(--light); }
+.file-input { width: 100%; font-size:0.65rem; }
+.menu-inputs { display:flex; flex-direction:column; gap:8px; }
+.menu-inputs input { padding:8px 10px; font-size:0.9rem; }
+.del-btn { background:var(--warm); color:var(--red); border:none; padding:8px; border-radius:8px; cursor:pointer; font-weight:700; font-size:0.85rem; margin-top:4px;}
 
 footer { text-align:center; padding:20px; font-size:0.8rem; margin-top:auto; }
 footer a { color:#bba990; text-decoration:none; cursor:pointer; }
@@ -105,7 +106,6 @@ footer a:hover { color:var(--cookie); }
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
 <div id="loadingScreen">
   <div class="spinner">🍪</div>
   <h3 style="color:var(--cookie); font-family:'Lora'">Loading Shop...</h3>
@@ -140,9 +140,19 @@ footer a:hover { color:var(--cookie); }
   <div class="header"><h1>Review <em>Order</em></h1></div>
   <div class="r-box">
     <div class="section-label">Summary</div>
-    <div id="reviewItems"></div>
-    <div class="r-total"><span>Total</span><span id="reviewTotal">฿0</span></div>
-    <div class="section-label" style="margin-top:15px;">Delivery To</div>
+    <div id="reviewItems" style="margin-bottom:10px;"></div>
+    
+    <!-- ส่วนคำนวณค่าส่ง -->
+    <div class="r-shipping">
+      <span>Subtotal</span><span id="reviewSubtotal">฿0</span>
+    </div>
+    <div class="r-shipping" style="border:none;">
+      <span>Shipping Fee</span><span id="reviewShipping">฿0</span>
+    </div>
+    
+    <div class="r-total"><span>Grand Total</span><span id="reviewTotal">฿0</span></div>
+
+    <div class="section-label" style="margin-top:25px;">Delivery To</div>
     <div id="reviewContact" style="font-weight:700; font-size:0.95rem;"></div>
     <div id="reviewAddress" style="font-size:0.85rem; color:var(--mid); margin-top:5px; line-height:1.5;"></div>
   </div>
@@ -183,7 +193,6 @@ footer a:hover { color:var(--cookie); }
     <div class="nav-btn" onclick="switchAdminTab('tabSettings', this)">⚙️ Settings</div>
   </div>
 
-  <!-- TAB: SUMMARY -->
   <div id="tabSummary" class="admin-tab-content active">
     <div class="stats-grid">
       <div class="stat-card"><h3>Total Revenue</h3><div class="val" id="statRev">฿0</div></div>
@@ -191,13 +200,11 @@ footer a:hover { color:var(--cookie); }
     </div>
   </div>
 
-  <!-- TAB: LIVE ORDERS -->
   <div id="tabOrders" class="admin-tab-content">
     <button class="btn btn-secondary" style="margin-bottom:15px;" onclick="loadAdminData()">Refresh Orders ↻</button>
     <div id="adminOrdersList"></div>
   </div>
 
-  <!-- TAB: SETTINGS & MENU -->
   <div id="tabSettings" class="admin-tab-content">
     <div class="form-section">
       <div class="section-label">Shop Settings</div>
@@ -210,6 +217,7 @@ footer a:hover { color:var(--cookie); }
       </div>
       <div class="field"><label>Shop Name</label><input type="text" id="setShopName"></div>
       <div class="field"><label>Welcome Description</label><textarea id="setShopDesc"></textarea></div>
+      <div class="field"><label>Shipping Fee (฿)</label><input type="number" id="setShippingFee" placeholder="e.g. 50"></div>
     </div>
 
     <div class="form-section">
@@ -227,9 +235,8 @@ footer a:hover { color:var(--cookie); }
 
 <script>
 // ════════════════════════════════════════════════════════════
-// ⚠️ ใส่ลิงก์ Web App URL ตัวใหม่ ตรงนี้ค่ะ
 const API_URL = "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec"; 
-const ADMIN_PIN = "admin1234";
+const ADMIN_PIN = "admin8616";
 // ════════════════════════════════════════════════════════════
 
 let SHOP_SETTINGS = {};
@@ -238,7 +245,7 @@ let ORDERS = [];
 const cart = {};
 let currentOrder = null;
 
-// --- INITIAL LOAD ---
+// --- INIT ---
 window.onload = () => {
   if (API_URL === "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้") {
     alert("โปรดใส่ลิงก์ API_URL ในโค้ดก่อนใช้งานค่ะ");
@@ -255,9 +262,7 @@ window.onload = () => {
       renderMenu();
       document.getElementById('loadingScreen').style.display = 'none';
       showPage('orderPage');
-    })
-    .catch(err => {
-      alert("Error loading shop data. Check console.");
+    }).catch(err => {
       console.error(err);
       document.getElementById('loadingScreen').style.display = 'none';
     });
@@ -276,20 +281,25 @@ function applyShopSettings() {
   }
 }
 
-// --- FRONTEND LOGIC ---
+// --- FRONTEND ---
 function renderMenu() {
-  document.getElementById('menuList').innerHTML = MENU.map(m => `
+  document.getElementById('menuList').innerHTML = MENU.map(m => {
+    const imgHtml = m.image ? `<img src="${m.image}" class="item-img">` : `<div class="item-img">🍪</div>`;
+    return `
     <div class="item-row" id="row-${m.id}" onclick="toggleItem('${m.id}')">
-      <div class="item-emoji">${m.emoji}</div>
-      <div class="item-info"><strong>${m.name}</strong><span>${m.desc}</span></div>
-      <div class="qty-wrap" onclick="event.stopPropagation()">
-        <div class="qbtn" onclick="changeQty('${m.id}',-1)">-</div>
-        <div class="qnum" id="q-${m.id}">1</div>
-        <div class="qbtn" onclick="changeQty('${m.id}',1)">+</div>
+      ${imgHtml}
+      <div class="item-info">
+        <strong>${m.name}</strong>
+        <span>${m.desc}</span>
+        <div class="qty-wrap" onclick="event.stopPropagation()">
+          <div class="qbtn" onclick="changeQty('${m.id}',-1)">-</div>
+          <div class="qnum" id="q-${m.id}">1</div>
+          <div class="qbtn" onclick="changeQty('${m.id}',1)">+</div>
+        </div>
       </div>
       <div class="item-price">฿${m.price}</div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function toggleItem(id) {
@@ -321,20 +331,32 @@ function goToReview() {
 
   const items = Object.entries(cart).map(([id, qty]) => {
     const m = MENU.find(x => x.id === id);
-    return { id, name:m.name, emoji:m.emoji, qty, price:m.price, subtotal:m.price*qty };
+    return { name:m.name, qty, price:m.price, subtotal:m.price*qty };
   });
-  const total = items.reduce((s, i) => s+i.subtotal, 0);
+  
+  const subtotal = items.reduce((s, i) => s+i.subtotal, 0);
+  const shipping = Number(SHOP_SETTINGS.shippingFee) || 0;
+  const grandTotal = subtotal + shipping;
+
+  // เพิ่มค่าจัดส่งไปในรายการเพื่อเก็บลงชีต
+  const itemsForDb = [...items];
+  if(shipping > 0) {
+    itemsForDb.push({ name: "+ Shipping Fee", qty: 1, subtotal: shipping });
+  }
 
   currentOrder = {
     action: "newOrder",
     time: new Date().toLocaleString('th-TH'),
-    name, phone, address, notes, items, total
+    name, phone, address, notes, items: itemsForDb, total: grandTotal
   };
 
   document.getElementById('reviewItems').innerHTML = items.map(it => 
-    `<div class="r-item"><span>${it.emoji} ${it.name} (x${it.qty})</span><span>฿${it.subtotal}</span></div>`
+    `<div class="r-item"><span>${it.name} (x${it.qty})</span><span>฿${it.subtotal}</span></div>`
   ).join('');
-  document.getElementById('reviewTotal').textContent = `฿${total}`;
+  
+  document.getElementById('reviewSubtotal').textContent = `฿${subtotal}`;
+  document.getElementById('reviewShipping').textContent = `฿${shipping}`;
+  document.getElementById('reviewTotal').textContent = `฿${grandTotal}`;
   document.getElementById('reviewContact').textContent = `${name} (${phone})`;
   document.getElementById('reviewAddress').innerHTML = address.replace(/\n/g,'<br>');
 
@@ -348,17 +370,14 @@ function confirmOrder() {
 
   fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" }, // ใช้ text/plain เลี่ยงปัญหา CORS
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify(currentOrder)
-  })
-  .then(res => res.json())
-  .then(data => {
+  }).then(() => {
     btn.disabled = false;
     btn.textContent = "Confirm & Place Order";
     showPage('thankPage');
-  })
-  .catch(err => {
-    alert("Order saved, but there was a network issue.");
+  }).catch(() => {
+    alert("Order saved locally, network issue.");
     showPage('thankPage');
   });
 }
@@ -370,7 +389,7 @@ function resetForm() {
   showPage('orderPage');
 }
 
-// --- ADMIN LOGIC ---
+// --- ADMIN ---
 function loginAdmin() {
   if (document.getElementById('adminPin').value === ADMIN_PIN) {
     document.getElementById('adminPin').value = '';
@@ -397,12 +416,10 @@ function loadAdminData() {
       SHOP_SETTINGS = data.settings;
       MENU = data.menu;
       
-      // Update Summary
       document.getElementById('statCount').textContent = ORDERS.length;
       const totalRev = ORDERS.reduce((sum, o) => sum + Number(o.total), 0);
       document.getElementById('statRev').textContent = `฿${totalRev.toLocaleString()}`;
 
-      // Update Orders List
       if(ORDERS.length === 0) {
         document.getElementById('adminOrdersList').innerHTML = `<p style="text-align:center; color:#888;">No orders yet.</p>`;
       } else {
@@ -413,36 +430,77 @@ function loadAdminData() {
             <div class="phone">📞 ${o.phone}</div>
             <div class="address">${o.address.replace(/\n/g,'<br>')}</div>
             <div class="items">${o.items}</div>
-            <div style="font-weight:700; color:var(--cookie); margin-top:10px;">Total: ฿${o.total.toLocaleString()}</div>
+            <div style="font-weight:700; color:var(--cookie); margin-top:10px;">Grand Total: ฿${o.total.toLocaleString()}</div>
             ${o.notes ? `<div style="font-size:0.8rem; color:#888; margin-top:5px;">📝 ${o.notes}</div>` : ''}
           </div>
         `).join('');
       }
 
-      // Populate Settings Form
       document.getElementById('setIsOpen').value = SHOP_SETTINGS.isOpen ? "true" : "false";
       document.getElementById('setShopName').value = SHOP_SETTINGS.shopName;
       document.getElementById('setShopDesc').value = SHOP_SETTINGS.shopDesc;
+      document.getElementById('setShippingFee').value = SHOP_SETTINGS.shippingFee || 0;
       renderMenuEditor();
     });
 }
 
 function renderMenuEditor() {
   const container = document.getElementById('menuEditorList');
-  container.innerHTML = MENU.map((m, index) => `
-    <div class="edit-menu-row" id="editMenu-${index}">
-      <input type="text" placeholder="Emoji" value="${m.emoji}" class="m-emoji">
-      <input type="text" placeholder="Menu Name" value="${m.name}" class="m-name">
-      <input type="number" placeholder="Price" value="${m.price}" class="m-price">
-      <input type="text" placeholder="Description..." value="${m.desc}" class="m-desc full-width">
-      <input type="hidden" value="${m.id}" class="m-id">
-      <button class="del-btn full-width" onclick="removeMenuItem(${index})">Remove Item</button>
+  container.innerHTML = MENU.map((m, index) => {
+    const imgSrc = m.image ? m.image : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; // Transparent placeholder
+    return `
+    <div class="edit-menu-row">
+      <div class="img-upload-box">
+        <img src="${imgSrc}" class="img-preview" id="preview-${index}">
+        <input type="file" class="file-input" accept="image/*" onchange="compressAndPreview(event, ${index})">
+        <input type="hidden" class="m-image" id="b64-${index}" value="${m.image || ''}">
+      </div>
+      <div class="menu-inputs">
+        <input type="text" placeholder="Menu Name" value="${m.name}" class="m-name">
+        <input type="text" placeholder="Description..." value="${m.desc}" class="m-desc">
+        <input type="hidden" value="${m.id}" class="m-id">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <input type="number" placeholder="Price" value="${m.price}" class="m-price" style="width:100%; padding:8px;">
+        <button class="del-btn" onclick="removeMenuItem(${index})">Remove</button>
+      </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
+}
+
+// 🪄 ฟังก์ชันบีบอัดรูปภาพด้วย HTML5 Canvas (ไม่เปลืองเนื้อที่ชีต)
+function compressAndPreview(event, index) {
+  const file = event.target.files[0];
+  if(!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const MAX_WIDTH = 200; // ย่อขนาดความกว้างเหลือแค่ 200px
+      const scaleSize = MAX_WIDTH / img.width;
+      canvas.width = MAX_WIDTH;
+      canvas.height = img.height * scaleSize;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+      // แปลงเป็น Base64 (Quality 0.7 = ลดขนาดไฟล์ลงอีก)
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+      
+      // อัปเดตในจอแอดมิน
+      document.getElementById('preview-' + index).src = dataUrl;
+      document.getElementById('b64-' + index).value = dataUrl;
+    }
+    img.src = e.target.result;
+  }
+  reader.readAsDataURL(file);
 }
 
 function addMenuItem() {
-  MENU.push({ id: 'm' + Date.now(), emoji: '🍪', name: '', desc: '', price: 0 });
+  MENU.push({ id: 'm' + Date.now(), image: '', name: '', desc: '', price: 0 });
   renderMenuEditor();
 }
 
@@ -458,20 +516,19 @@ function saveAdminSettings() {
   btn.disabled = true;
   btn.textContent = "Saving...";
 
-  // Get Settings
   const newSettings = {
     isOpen: document.getElementById('setIsOpen').value === "true",
     shopName: document.getElementById('setShopName').value,
-    shopDesc: document.getElementById('setShopDesc').value
+    shopDesc: document.getElementById('setShopDesc').value,
+    shippingFee: Number(document.getElementById('setShippingFee').value) || 0
   };
 
-  // Get Menu from DOM
   const newMenu = [];
   const rows = document.querySelectorAll('.edit-menu-row');
-  rows.forEach(row => {
+  rows.forEach((row, index) => {
     newMenu.push({
       id: row.querySelector('.m-id').value,
-      emoji: row.querySelector('.m-emoji').value,
+      image: row.querySelector('.m-image').value, // รูป Base64
       name: row.querySelector('.m-name').value,
       price: Number(row.querySelector('.m-price').value),
       desc: row.querySelector('.m-desc').value
@@ -489,19 +546,15 @@ function saveAdminSettings() {
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify(payload)
   })
-  .then(res => res.json())
-  .then(data => {
+  .then(() => {
     btn.disabled = false;
     btn.textContent = "Save All Settings & Menu";
-    alert("Shop settings & Menu updated successfully!");
-    
-    // อัปเดตตัวแปรในระบบและหน้าบ้าน
+    alert("Shop updated successfully!");
     SHOP_SETTINGS = newSettings;
     MENU = newMenu;
     applyShopSettings();
     renderMenu();
-  })
-  .catch(err => {
+  }).catch(() => {
     alert("Error saving settings.");
     btn.disabled = false;
     btn.textContent = "Save All Settings & Menu";
