@@ -56,7 +56,6 @@ body { font-family:'Itim', cursive; background:var(--cream); color:var(--dark); 
 input[type="text"], input[type="number"], textarea, select { width:100%; padding:12px; border:1.5px solid var(--light); border-radius:10px; font-family:'Itim', cursive; font-size:1rem; background:var(--cream); outline:none; transition:0.2s; }
 input:focus, textarea:focus, select:focus { border-color:var(--cookie); background:#fff; }
 
-/* ดีไซน์ปุ่มเลือกการจัดส่ง */
 .radio-group { display:flex; flex-direction:column; gap:10px; }
 .radio-label { display:flex; align-items:center; gap:10px; padding:12px 15px; border:1.5px solid var(--light); border-radius:12px; cursor:pointer; transition:all 0.2s; background:var(--cream); }
 .radio-label:hover { border-color:var(--cookie); }
@@ -98,11 +97,11 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 <body>
 
 <div id="loadingScreen">
-  <div class="spinner">🍪</div>
+  <div class="spinner">✨</div>
   <h3 style="color:var(--cookie); font-family:'Lora'">Loading Shop...</h3>
 </div>
 
-<!-- หน้า 1: เลือกหมวดหมู่ -->
+<!-- หน้า 1: เลือกระบบ -->
 <div id="selectPage" class="page container active">
   <div class="header">
     <h1 id="uiShopNameMain">Arina Shop</h1>
@@ -118,93 +117,117 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
     </div>
     <div class="mode-card" onclick="selectMode('merch')">
       <div class="mode-icon">✨</div>
-      <div class="mode-title">สั่งซื้อสินค้า Pre-order</div>
-      <div style="font-size:0.9rem; color:var(--mid); margin-top:5px;">Official Merchandise</div>
+      <div class="mode-title">สั่งสินค้า / เซ็ตสินค้า</div>
+      <div style="font-size:0.9rem; color:var(--mid); margin-top:5px;">Pre-order Merchandise</div>
+    </div>
+    <div class="mode-card" onclick="showPage('payBalancePage')" style="border-color:var(--green); background:#f4fcf6;">
+      <div class="mode-icon">💸</div>
+      <div class="mode-title" style="color:var(--green);">แจ้งชำระยอดคงเหลือ</div>
+      <div style="font-size:0.9rem; color:var(--green); margin-top:5px;">สำหรับลูกค้าที่มัดจำไว้ 30%</div>
     </div>
   </div>
 </div>
 
-<!-- หน้า 2: เลือกสินค้า (STEP 1) -->
+<!-- หน้า 2: เลือกสินค้า -->
 <div id="orderPage" class="page container">
-  <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('selectPage')">← ย้อนกลับไปเลือกหมวดหมู่</button>
+  <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('selectPage')">← ย้อนกลับ</button>
   <div class="header">
     <h1 id="modeTitle">เลือกสินค้า</h1>
     <p>STEP 1: เลือกรายการที่ต้องการ 🛒</p>
   </div>
-  
   <div class="items-list" id="menuList"></div>
-  
-  <!-- เปลี่ยนปุ่มเป็น ถัดไป แทน -->
   <button class="btn btn-primary" onclick="goToShipping()">ถัดไป (กรอกข้อมูลจัดส่ง) ✦</button>
 </div>
 
-<!-- หน้า 3: ข้อมูลจัดส่ง (STEP 2) -->
+<!-- หน้า 3: ข้อมูลจัดส่ง -->
 <div id="shippingPage" class="page container">
   <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('orderPage')">← ย้อนกลับไปเลือกสินค้า</button>
   <div class="header">
     <h1>ข้อมูลการจัดส่ง</h1>
     <p>STEP 2: กรอกข้อมูลให้ครบถ้วน 📦</p>
   </div>
-  
   <div class="form-section">
-    <!-- ตัวเลือกวิธีการรับสินค้า -->
     <div class="field">
       <label>วิธีการรับสินค้า *</label>
       <div class="radio-group">
         <label class="radio-label active" id="label-shipping">
-          <input type="radio" name="delivMethod" value="shipping" checked onchange="toggleAddress()"> 
-          🚚 จัดส่งตามที่อยู่ (มีค่าจัดส่ง)
+          <input type="radio" name="delivMethod" value="shipping" checked onchange="toggleAddress()"> 🚚 จัดส่งตามที่อยู่ (มีค่าจัดส่ง)
         </label>
         <label class="radio-label" id="label-pickup">
-          <input type="radio" name="delivMethod" value="pickup" onchange="toggleAddress()"> 
-          🎪 รับที่งาน Vworld (ฟรีค่าจัดส่ง)
+          <input type="radio" name="delivMethod" value="pickup" onchange="toggleAddress()"> 🎪 รับที่งาน Vworld (ฟรีค่าจัดส่ง)
         </label>
       </div>
     </div>
-    
     <div class="field"><label>ชื่อ-นามสกุล *</label><input type="text" id="fname" placeholder="ชื่อของคุณลูกค้า"></div>
     <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="fphone" placeholder="ช่องทางการติดต่อ"></div>
-    
-    <!-- ซ่อนได้ถ้ารับที่งาน -->
     <div class="field" id="addressFieldContainer">
       <label>ที่อยู่จัดส่ง *</label>
       <textarea id="faddress" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
     </div>
-    
     <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="เช่น แพ้ถั่ว, ไซส์เสื้อ, ลายที่ต้องการ..."></div>
   </div>
-  
   <button class="btn btn-primary" onclick="goToReview()">ตรวจสอบออเดอร์ (Review) ✦</button>
 </div>
 
-
-<!-- หน้า 4: Review (STEP 3) -->
+<!-- หน้า 4: Review และเลือกวิธีชำระเงิน -->
 <div id="reviewPage" class="page container">
   <div class="header"><h1>Review <em>Order</em></h1></div>
   <div class="r-box">
-    <div class="section-label">Summary</div>
+    <div class="section-label">สรุปรายการสินค้า</div>
     <div id="reviewItems" style="margin-bottom:10px;"></div>
     <div class="r-shipping"><span>ค่าสินค้า (Subtotal)</span><span id="reviewSubtotal">฿0</span></div>
-    <div class="r-shipping" style="border:none;"><span>ค่าจัดส่ง (Shipping Fee)</span><span id="reviewShipping">฿0</span></div>
-    <div class="r-total"><span>ยอดรวมทั้งหมด (Grand Total)</span><span id="reviewTotal">฿0</span></div>
-    <div class="section-label" style="margin-top:25px;">Delivery To</div>
-    <div id="reviewContact" style="font-size:1.1rem;"></div>
-    <div id="reviewAddress" style="font-size:0.95rem; color:var(--mid); margin-top:5px; line-height:1.5;"></div>
+    <div class="r-shipping" style="border:none;"><span>ค่าจัดส่ง (Shipping)</span><span id="reviewShipping">฿0</span></div>
   </div>
-  <button class="btn btn-primary" id="btnConfirm" onclick="confirmOrder()">Confirm & Place Order</button>
+
+  <div class="form-section">
+    <div class="section-label">รูปแบบการชำระเงิน</div>
+    <div class="radio-group">
+      <label class="radio-label active" id="label-pay100">
+        <input type="radio" name="payMethod" value="100" checked onchange="updatePaymentMode()"> 💳 ชำระเต็มจำนวน 100%
+      </label>
+      <label class="radio-label" id="label-pay30">
+        <input type="radio" name="payMethod" value="30" onchange="updatePaymentMode()"> ⏳ มัดจำ 30% (สั่งซื้อล่วงหน้า)
+      </label>
+    </div>
+    <div id="depositWarning" style="display:none; font-size:0.9rem; color:var(--red); margin-top:10px; line-height:1.4; background:#fbe4e9; padding:10px; border-radius:8px;">
+      ⚠️ <b>เงื่อนไขมัดจำ:</b> ขอสงวนสิทธิ์ไม่คืนเงินหากยกเลิกออเดอร์หลังวันที่ 14 และร้านจะจัดส่งสินค้าเมื่อชำระส่วนที่เหลือครบถ้วนแล้วเท่านั้นค่ะ
+    </div>
+  </div>
+
+  <div class="r-box" style="text-align:center; background:#fffbf5;">
+    <div id="reviewTotalText" style="font-size:1.2rem; font-weight:bold; line-height:1.6;"></div>
+  </div>
+
+  <button class="btn btn-primary" id="btnConfirm" onclick="confirmOrder()">ยืนยันและสั่งซื้อ</button>
   <button class="btn btn-secondary" onclick="showPage('shippingPage')">กลับไปแก้ไขข้อมูล</button>
 </div>
 
-<!-- หน้า 5: Thank You (TipMe) -->
+<!-- หน้าจ่ายส่วนที่เหลือ (Balance) -->
+<div id="payBalancePage" class="page container">
+  <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('selectPage')">← ย้อนกลับ</button>
+  <div class="header">
+    <h1 style="color:var(--green);">แจ้งชำระยอดคงเหลือ</h1>
+    <p>สำหรับลูกค้าที่มัดจำ 30% ไว้แล้ว ✨</p>
+  </div>
+  <div class="form-section" style="border-color:var(--green);">
+    <div class="field"><label>ชื่อ-นามสกุลที่สั่งซื้อ *</label><input type="text" id="bname" placeholder="ชื่อที่ใช้สั่งซื้อออเดอร์"></div>
+    <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="bphone" placeholder="ช่องทางการติดต่อ"></div>
+    <div class="field"><label>ยอดเงินที่โอนเพิ่ม (฿) *</label><input type="number" id="bamount" placeholder="ยอดเงินส่วนที่เหลือ"></div>
+    <div class="field"><label>หมายเหตุ / รหัสออเดอร์ (optional)</label><input type="text" id="bnotes" placeholder="เผื่อแม่ค้าหาง่ายขึ้นค่ะ"></div>
+  </div>
+  <button class="btn btn-primary" style="background:var(--green);" onclick="submitBalance()">แจ้งโอนเงิน ✦</button>
+</div>
+
+<!-- หน้า 5: Thank You -->
 <div id="thankPage" class="page container" style="text-align:center; padding-top:40px;">
   <div style="font-size:4rem; margin-bottom:10px;">🤎</div>
-  <h2 style="font-family:'Lora'; margin-bottom:10px;">Order Received!</h2>
-  <p style="color:var(--mid); margin-bottom:20px; font-size:1.25rem; font-weight:600;">ได้รับออเดอร์แล้ว ขอบคุณที่อุดหนุนอารินะนะคะ♥</p>
+  <h2 style="font-family:'Lora'; margin-bottom:10px;" id="tyTitle">Order Received!</h2>
+  <p style="color:var(--mid); margin-bottom:20px; font-size:1.25rem; font-weight:600;" id="tySubtitle">ขอบคุณที่อุดหนุนอารินะนะคะ♥</p>
 
   <div class="r-box" style="text-align:center; padding: 25px 20px;">
     <div style="border-bottom:1px solid var(--light); padding-bottom:15px; margin-bottom:15px;">
-      <div style="font-size:1rem; color:var(--mid); margin-bottom:5px;">ยอดชำระเงินทั้งหมด</div>
-      <div id="thankYouTotal" style="font-size:2.5rem; color:var(--cookie); font-family:'Lora',serif;">฿0</div>
+      <div style="font-size:1rem; color:var(--mid); margin-bottom:5px;">ยอดที่ต้องชำระตอนนี้</div>
+      <div id="thankYouTotal" style="font-size:2.5rem; color:var(--cookie); font-family:'Lora',serif; font-weight:bold;">฿0</div>
     </div>
     <div style="font-size:1.1rem; line-height:1.6; color:var(--dark);">
       <strong>💳 ช่องทางการชำระเงิน</strong><br>
@@ -250,8 +273,9 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 
   <div id="tabOrders" class="admin-tab-content">
     <div class="sub-nav">
-      <button class="sub-nav-btn active" id="btnViewCookie" onclick="renderAdminOrders('cookie')">ออเดอร์ ขนม/คุกกี้</button>
-      <button class="sub-nav-btn" id="btnViewMerch" onclick="renderAdminOrders('merch')">ออเดอร์ สินค้า (Merch)</button>
+      <button class="sub-nav-btn active" id="btnViewCookie" onclick="renderAdminOrders('cookie')">🍪 ออเดอร์ขนม</button>
+      <button class="sub-nav-btn" id="btnViewMerch" onclick="renderAdminOrders('merch')">✨ ออเดอร์สินค้า</button>
+      <button class="sub-nav-btn" id="btnViewBalance" onclick="renderAdminOrders('balance')" style="border-color:var(--green); color:var(--green);">💸 จ่ายยอดคงเหลือ</button>
     </div>
     <button class="btn btn-secondary" style="margin-bottom:15px;" onclick="loadAdminData()">Refresh Orders ↻</button>
     <div id="adminOrdersList"></div>
@@ -259,39 +283,29 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 
   <div id="tabSettings" class="admin-tab-content">
     <div class="form-section">
-      <div class="section-label">Shop Settings (ใช้ร่วมกัน)</div>
-      <div class="field">
-        <label>สถานะร้าน (Shop Status)</label>
-        <select id="setIsOpen"><option value="true">🟢 OPEN (เปิดรับออเดอร์)</option><option value="false">🔴 CLOSED (ปิดรับออเดอร์)</option></select>
-      </div>
-      <div class="field"><label>ชื่อร้าน (Shop Name)</label><input type="text" id="setShopName"></div>
+      <div class="section-label">Shop Settings</div>
+      <div class="field"><label>สถานะร้าน</label><select id="setIsOpen"><option value="true">🟢 เปิดรับออเดอร์</option><option value="false">🔴 ปิดรับออเดอร์</option></select></div>
+      <div class="field"><label>ชื่อร้าน</label><input type="text" id="setShopName"></div>
       <div class="field"><label>ข้อความต้อนรับ</label><textarea id="setShopDesc"></textarea></div>
-      <div class="field"><label>ค่าจัดส่ง (฿) - *ถ้าลูกค้าเลือกรับงาน Vworld จะกลายเป็น 0 ให้อัตโนมัติ*</label><input type="number" id="setShippingFee"></div>
+      <div class="field"><label>ค่าจัดส่ง (฿) - ฟรีถ้ารับงาน Vworld</label><input type="number" id="setShippingFee"></div>
       <div class="field"><label>Theme Color (คลิกเพื่อเลือกสี)</label><input type="color" id="setThemeColor" style="height:50px; cursor:pointer; padding: 5px;"></div>
       <div class="field">
         <label>ภาพพื้นหลัง (วางลิงก์รูป หรือ อัปโหลดจากเครื่อง)</label>
         <img id="bgPreview" style="width:100%; max-height:200px; object-fit:cover; display:none; border-radius:10px; margin-bottom:10px; border:1px solid #ccc;">
-        <input type="text" id="setBgImage" placeholder="วางลิงก์รูปลงที่นี่ หรือกดเลือกไฟล์ด้านล่าง..." style="margin-bottom:8px;" oninput="updateBgPreview()">
+        <input type="text" id="setBgImage" placeholder="วางลิงก์รูปลงที่นี่..." style="margin-bottom:8px;" oninput="updateBgPreview()">
         <input type="file" id="bgFileInput" accept="image/*" style="font-size: 0.9rem;" onchange="compressBgImage(event)">
         <button class="btn btn-secondary btn-small" style="margin-top:10px;" onclick="clearBgImage()">🗑️ ลบรูปพื้นหลัง</button>
       </div>
     </div>
-
-    <!-- ส่วนจัดการเมนูแยกหมวด -->
-    <div class="form-section">
-      <div class="section-label" style="display:flex; justify-content:space-between; align-items:center;">
-        🍪 เมนูขนม/คุกกี้ <button class="btn btn-secondary btn-small" style="width:auto; margin:0;" onclick="addMenuItem('cookie')">+ เพิ่มขนม</button>
-      </div>
-      <div id="menuEditorList_cookie"></div>
-    </div>
     
     <div class="form-section">
-      <div class="section-label" style="display:flex; justify-content:space-between; align-items:center;">
-        ✨ สินค้า Pre-order <button class="btn btn-secondary btn-small" style="width:auto; margin:0;" onclick="addMenuItem('merch')">+ เพิ่มสินค้า</button>
-      </div>
+      <div class="section-label" style="display:flex; justify-content:space-between; align-items:center;">🍪 เมนูขนม/คุกกี้ <button class="btn btn-secondary btn-small" style="width:auto; margin:0;" onclick="addMenuItem('cookie')">+ เพิ่มขนม</button></div>
+      <div id="menuEditorList_cookie"></div>
+    </div>
+    <div class="form-section">
+      <div class="section-label" style="display:flex; justify-content:space-between; align-items:center;">✨ สินค้า / เซ็ตสินค้า <button class="btn btn-secondary btn-small" style="width:auto; margin:0;" onclick="addMenuItem('merch')">+ เพิ่มสินค้า</button></div>
       <div id="menuEditorList_merch"></div>
     </div>
-
     <button class="btn btn-primary" id="btnSaveAdmin" onclick="saveAdminSettings()">Save All Settings & Menu</button>
   </div>
 </div>
@@ -301,14 +315,15 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 <script>
 // ════════════════════════════════════════════════════════════
 const API_URL = "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec"; 
-const ADMIN_PIN = "admin1234";
+const ADMIN_PIN = "admin8616";
 // ════════════════════════════════════════════════════════════
 
 let SHOP_SETTINGS = {};
-let MENU = [];      // สำหรับคุกกี้
-let MERCH_MENU = []; // สำหรับสินค้า
-let ORDERS = [];    // ออเดอร์คุกกี้
-let MERCH_ORDERS = []; // ออเดอร์สินค้า
+let MENU = [];      
+let MERCH_MENU = []; 
+let ORDERS = [];    
+let MERCH_ORDERS = []; 
+let BALANCE_PAYMENTS = [];
 
 let cartCookie = {};
 let cartMerch = {};
@@ -316,11 +331,7 @@ let currentMode = "cookie";
 let currentOrder = null;
 
 window.onload = () => {
-  if (API_URL === "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้") {
-    alert("อย่าลืมนำ API_URL มาใส่ในโค้ดนะคะ 🤎");
-    document.getElementById('loadingScreen').style.display = 'none';
-    return;
-  }
+  if (API_URL === "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec") return alert("อย่าลืมใส่ API_URL นะคะ 🤎");
   fetch(`${API_URL}?action=getShopData`)
     .then(res => res.json())
     .then(data => {
@@ -330,24 +341,15 @@ window.onload = () => {
       applyShopSettings();
       document.getElementById('loadingScreen').style.display = 'none';
       showPage('selectPage');
-    }).catch(err => {
-      console.error(err);
-      document.getElementById('loadingScreen').style.display = 'none';
     });
 };
 
 function applyShopSettings() {
   document.getElementById('uiShopNameMain').textContent = SHOP_SETTINGS.shopName;
   document.getElementById('uiShopDescMain').textContent = SHOP_SETTINGS.shopDesc;
-  
-  if(SHOP_SETTINGS.themeColor) {
-    document.documentElement.style.setProperty('--cookie', SHOP_SETTINGS.themeColor);
-  }
-  if (SHOP_SETTINGS.bgImage) {
-    document.body.style.backgroundImage = `url(${SHOP_SETTINGS.bgImage})`;
-  } else {
-    document.body.style.backgroundImage = "none";
-  }
+  if(SHOP_SETTINGS.themeColor) document.documentElement.style.setProperty('--cookie', SHOP_SETTINGS.themeColor);
+  if (SHOP_SETTINGS.bgImage) document.body.style.backgroundImage = `url(${SHOP_SETTINGS.bgImage})`;
+  else document.body.style.backgroundImage = "none";
 
   if (SHOP_SETTINGS.isOpen) {
     document.getElementById('closedBanner').style.display = 'none';
@@ -358,10 +360,9 @@ function applyShopSettings() {
   }
 }
 
-// 🌟 เลือกโหมด 🌟
 function selectMode(mode) {
   currentMode = mode;
-  document.getElementById('modeTitle').innerHTML = mode === 'cookie' ? "สั่งขนม / คุกกี้ 🍪" : "สั่งสินค้า Pre-order ✨";
+  document.getElementById('modeTitle').innerHTML = mode === 'cookie' ? "สั่งขนม / คุกกี้ 🍪" : "สั่งสินค้า / เซ็ตสินค้า ✨";
   renderMenu();
   showPage('orderPage');
 }
@@ -369,15 +370,13 @@ function selectMode(mode) {
 function renderMenu() {
   const targetMenu = currentMode === 'cookie' ? MENU : MERCH_MENU;
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
-
   document.getElementById('menuList').innerHTML = targetMenu.map(m => {
     const imgHtml = m.image ? `<img src="${m.image}" class="item-img">` : `<div class="item-img">${currentMode === 'cookie'?'🍪':'✨'}</div>`;
     return `
     <div class="item-row" id="row-${m.id}" onclick="toggleItem('${m.id}')">
       ${imgHtml}
       <div class="item-info">
-        <strong>${m.name}</strong>
-        <span>${m.desc}</span>
+        <strong>${m.name}</strong><span>${m.desc}</span>
         <div class="qty-wrap" onclick="event.stopPropagation()">
           <div class="qbtn" onclick="changeQty('${m.id}',-1)">-</div>
           <div class="qnum" id="q-${m.id}">${targetCart[m.id] || 1}</div>
@@ -387,7 +386,6 @@ function renderMenu() {
       <div class="item-price">฿${m.price}</div>
     </div>`;
   }).join('');
-  
   Object.keys(targetCart).forEach(id => {
     const row = document.getElementById('row-'+id);
     if(row) row.classList.add('selected');
@@ -397,53 +395,37 @@ function renderMenu() {
 function toggleItem(id) {
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
   const row = document.getElementById('row-'+id);
-  if (targetCart[id]) {
-    delete targetCart[id];
-    row.classList.remove('selected');
-  } else {
-    targetCart[id] = 1;
-    row.classList.add('selected');
-    document.getElementById('q-'+id).textContent = 1;
-  }
+  if (targetCart[id]) { delete targetCart[id]; row.classList.remove('selected'); } 
+  else { targetCart[id] = 1; row.classList.add('selected'); document.getElementById('q-'+id).textContent = 1; }
 }
 
 function changeQty(id, delta) {
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
   if (!targetCart[id]) return;
   targetCart[id] += delta;
-  if (targetCart[id] <= 0) {
-    delete targetCart[id];
-    document.getElementById('row-'+id).classList.remove('selected');
-  } else {
-    document.getElementById('q-'+id).textContent = targetCart[id];
-  }
+  if (targetCart[id] <= 0) { delete targetCart[id]; document.getElementById('row-'+id).classList.remove('selected'); } 
+  else { document.getElementById('q-'+id).textContent = targetCart[id]; }
 }
 
-// 🌟 STEP 1 -> STEP 2 🌟
 function goToShipping() {
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
   if (Object.keys(targetCart).length === 0) return alert('กรุณาเลือกสินค้าอย่างน้อย 1 ชิ้นค่ะ ✨');
   showPage('shippingPage');
 }
 
-// 🌟 สลับช่องที่อยู่ (ซ่อน/แสดง) 🌟
 function toggleAddress() {
   const method = document.querySelector('input[name="delivMethod"]:checked').value;
-  const labelShipping = document.getElementById('label-shipping');
-  const labelPickup = document.getElementById('label-pickup');
-
   if(method === 'shipping') {
     document.getElementById('addressFieldContainer').style.display = 'block';
-    labelShipping.classList.add('active');
-    labelPickup.classList.remove('active');
+    document.getElementById('label-shipping').classList.add('active');
+    document.getElementById('label-pickup').classList.remove('active');
   } else {
     document.getElementById('addressFieldContainer').style.display = 'none';
-    labelPickup.classList.add('active');
-    labelShipping.classList.remove('active');
+    document.getElementById('label-pickup').classList.add('active');
+    document.getElementById('label-shipping').classList.remove('active');
   }
 }
 
-// 🌟 STEP 2 -> STEP 3 (Review) 🌟
 function goToReview() {
   const name = document.getElementById('fname').value.trim();
   const phone = document.getElementById('fphone').value.trim();
@@ -452,8 +434,6 @@ function goToReview() {
   let address = "";
 
   if (!name || !phone) return alert('กรุณากรอกชื่อและช่องทางการติดต่อให้ครบถ้วนค่ะ');
-
-  // ตรวจสอบที่อยู่เฉพาะกรณีจัดส่ง
   if (delivMethod === 'shipping') {
     address = document.getElementById('faddress').value.trim();
     if (!address) return alert('กรุณากรอกที่อยู่จัดส่งค่ะ');
@@ -461,95 +441,124 @@ function goToReview() {
 
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
   const targetMenu = currentMode === 'cookie' ? MENU : MERCH_MENU;
-
   const items = Object.entries(targetCart).map(([id, qty]) => {
     const m = targetMenu.find(x => x.id === id);
     return { name:m.name, qty, price:m.price, subtotal:m.price*qty };
   });
   
   const subtotal = items.reduce((s, i) => s+i.subtotal, 0);
-  
-  // 💡 ลอจิกค่าจัดส่งฟรี ถ้ารับที่งาน Vworld
   const shipping = delivMethod === 'shipping' ? (Number(SHOP_SETTINGS.shippingFee) || 0) : 0;
   const grandTotal = subtotal + shipping;
 
   const itemsForDb = [...items];
   if(shipping > 0) itemsForDb.push({ name: "+ ค่าจัดส่ง", qty: 1, subtotal: shipping });
 
-  // สร้างออบเจกต์จัดเก็บออเดอร์
   currentOrder = {
-    action: "newOrder",
-    orderType: currentMode,
+    action: "newOrder", orderType: currentMode,
     time: new Date().toLocaleString('th-TH'),
-    name, 
-    phone, 
-    address: delivMethod === 'shipping' ? `[จัดส่ง] ${address}` : `[รับที่งาน Vworld]`, 
-    notes, 
-    items: itemsForDb, 
-    total: grandTotal
+    name, phone, address: delivMethod === 'shipping' ? `[จัดส่ง] ${address}` : `[รับที่งาน Vworld]`, notes, 
+    items: itemsForDb, total: grandTotal
   };
 
   document.getElementById('reviewItems').innerHTML = items.map(it => 
     `<div class="r-item"><span>${it.name} (x${it.qty})</span><span>฿${it.subtotal}</span></div>`
   ).join('');
-  
   document.getElementById('reviewSubtotal').textContent = `฿${subtotal}`;
   document.getElementById('reviewShipping').textContent = shipping === 0 ? "ฟรี (Free)" : `฿${shipping}`;
-  document.getElementById('reviewTotal').textContent = `฿${grandTotal}`;
-  document.getElementById('reviewContact').textContent = `${name} (${phone})`;
   
-  // แสดงผลในหน้าจอ Review
-  if(delivMethod === 'shipping') {
-    document.getElementById('reviewAddress').innerHTML = "📍 จัดส่งถึงบ้าน:<br>" + address.replace(/\n/g,'<br>');
-  } else {
-    document.getElementById('reviewAddress').innerHTML = "🎪 <b>รับสินค้าด้วยตัวเองที่งาน Vworld</b>";
-  }
+  if(delivMethod === 'shipping') document.getElementById('reviewAddress').innerHTML = "📍 จัดส่งถึงบ้าน:<br>" + address.replace(/\n/g,'<br>');
+  else document.getElementById('reviewAddress').innerHTML = "🎪 <b>รับสินค้าด้วยตัวเองที่งาน Vworld</b>";
+  document.getElementById('reviewContact').textContent = `${name} (${phone})`;
 
+  updatePaymentMode(); // ตั้งค่าชำระ 100% เป็นค่าเริ่มต้น
   showPage('reviewPage');
+}
+
+// 🌟 ระบบอัปเดตยอด 100% กับ 30% 🌟
+function updatePaymentMode() {
+  if(!currentOrder) return;
+  const payMethod = document.querySelector('input[name="payMethod"]:checked').value;
+  const grandTotal = currentOrder.total;
+  
+  if(payMethod === '30') {
+    const deposit = Math.ceil(grandTotal * 0.3);
+    const remain = grandTotal - deposit;
+    currentOrder.paymentType = "มัดจำ 30%";
+    currentOrder.paidAmount = deposit;
+    currentOrder.remainingAmount = remain;
+    
+    document.getElementById('depositWarning').style.display = 'block';
+    document.getElementById('label-pay30').classList.add('active');
+    document.getElementById('label-pay100').classList.remove('active');
+    
+    document.getElementById('reviewTotalText').innerHTML = `
+      ยอดรวมทั้งหมด: ฿${grandTotal.toLocaleString()}<br>
+      <span style="color:var(--red); font-size:1.3rem;">ต้องชำระวันนี้ (30%): ฿${deposit.toLocaleString()}</span><br>
+      <span style="font-size:1rem; color:var(--mid);">ยอดคงเหลือ: ฿${remain.toLocaleString()}</span>
+    `;
+  } else {
+    currentOrder.paymentType = "เต็มจำนวน 100%";
+    currentOrder.paidAmount = grandTotal;
+    currentOrder.remainingAmount = 0;
+    
+    document.getElementById('depositWarning').style.display = 'none';
+    document.getElementById('label-pay100').classList.add('active');
+    document.getElementById('label-pay30').classList.remove('active');
+    
+    document.getElementById('reviewTotalText').innerHTML = `
+      <span style="color:var(--cookie);">ยอดชำระวันนี้ (100%): ฿${grandTotal.toLocaleString()}</span>
+    `;
+  }
 }
 
 function confirmOrder() {
   const btn = document.getElementById('btnConfirm');
   btn.disabled = true;
   btn.textContent = "กำลังส่งออเดอร์...";
-  document.getElementById('thankYouTotal').textContent = '฿' + currentOrder.total.toLocaleString();
+  
+  // แสดงยอดเงินในหน้า TipMe เฉพาะยอดที่ต้องจ่ายวันนี้ (paidAmount)
+  document.getElementById('thankYouTotal').textContent = '฿' + currentOrder.paidAmount.toLocaleString();
+  document.getElementById('tyTitle').textContent = "Order Received!";
+  document.getElementById('tySubtitle').textContent = "ได้รับออเดอร์แล้ว ขอบคุณที่อุดหนุนอารินะนะคะ♥";
 
-  fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify(currentOrder)
-  }).then(() => {
-    btn.disabled = false;
-    btn.textContent = "Confirm & Place Order";
-    showPage('thankPage');
-  }).catch(() => {
-    alert("ระบบออฟไลน์: บันทึกข้อมูลเรียบร้อยแล้ว");
-    btn.disabled = false;
-    btn.textContent = "Confirm & Place Order";
-    showPage('thankPage');
-  });
+  fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(currentOrder) })
+  .then(() => { btn.disabled = false; btn.textContent = "ยืนยันและสั่งซื้อ"; showPage('thankPage'); })
+  .catch(() => { alert("บันทึกออฟไลน์เรียบร้อย"); btn.disabled = false; btn.textContent = "ยืนยันและสั่งซื้อ"; showPage('thankPage'); });
+}
+
+// 🌟 ระบบแจ้งชำระยอดคงเหลือ 🌟
+function submitBalance() {
+  const name = document.getElementById('bname').value.trim();
+  const phone = document.getElementById('bphone').value.trim();
+  const amount = Number(document.getElementById('bamount').value) || 0;
+  const notes = document.getElementById('bnotes').value.trim();
+
+  if(!name || !phone || amount <= 0) return alert('กรุณากรอกชื่อ เบอร์โทร และยอดเงินที่โอนให้ครบถ้วนค่ะ');
+  
+  const payload = { action: "payBalance", time: new Date().toLocaleString('th-TH'), name, phone, amount, notes };
+
+  document.getElementById('thankYouTotal').textContent = '฿' + amount.toLocaleString();
+  document.getElementById('tyTitle').textContent = "Payment Noted!";
+  document.getElementById('tySubtitle').textContent = "รับทราบยอดโอนคงเหลือแล้วค่ะ ขอบคุณนะคะ♥";
+
+  fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+  .then(() => { showPage('thankPage'); })
+  .catch(() => { showPage('thankPage'); });
 }
 
 function resetAndGoHome() {
-  cartCookie = {};
-  cartMerch = {};
-  
-  // ล้างฟอร์ม
-  ['fname','fphone','faddress','fnotes'].forEach(id => document.getElementById(id).value = '');
+  cartCookie = {}; cartMerch = {};
+  ['fname','fphone','faddress','fnotes','bname','bphone','bamount','bnotes'].forEach(id => document.getElementById(id).value = '');
   document.querySelector('input[value="shipping"]').checked = true;
   toggleAddress();
-  
   showPage('selectPage');
 }
 
+// 🌟 ระบบ ADMIN 🌟
 function loginAdmin() {
   if (document.getElementById('adminPin').value === ADMIN_PIN) {
-    document.getElementById('adminPin').value = '';
-    showPage('ownerPage');
-    loadAdminData();
-  } else {
-    alert("รหัสผ่านไม่ถูกต้อง");
-  }
+    document.getElementById('adminPin').value = ''; showPage('ownerPage'); loadAdminData();
+  } else { alert("รหัสผ่านไม่ถูกต้อง"); }
 }
 
 function switchAdminTab(tabId, btnEl) {
@@ -566,6 +575,7 @@ function loadAdminData() {
     .then(data => {
       ORDERS = data.orders || [];
       MERCH_ORDERS = data.merchOrders || [];
+      BALANCE_PAYMENTS = data.balancePayments || [];
       SHOP_SETTINGS = data.settings;
       MENU = data.menu || [];
       MERCH_MENU = data.merchMenu || [];
@@ -576,7 +586,7 @@ function loadAdminData() {
       document.getElementById('statCount').textContent = totalCount;
       document.getElementById('statRev').textContent = `฿${totalRev.toLocaleString()}`;
 
-      renderAdminOrders('cookie'); // Default view
+      renderAdminOrders('cookie'); 
 
       document.getElementById('setIsOpen').value = SHOP_SETTINGS.isOpen ? "true" : "false";
       document.getElementById('setShopName').value = SHOP_SETTINGS.shopName;
@@ -596,21 +606,41 @@ function loadAdminData() {
 function renderAdminOrders(type) {
   document.getElementById('btnViewCookie').classList.remove('active');
   document.getElementById('btnViewMerch').classList.remove('active');
+  document.getElementById('btnViewBalance').classList.remove('active');
   
-  const targetOrders = type === 'cookie' ? ORDERS : MERCH_ORDERS;
-  document.getElementById(type === 'cookie' ? 'btnViewCookie' : 'btnViewMerch').classList.add('active');
-
   const list = document.getElementById('adminOrdersList');
+  document.getElementById(type === 'cookie' ? 'btnViewCookie' : (type === 'merch' ? 'btnViewMerch' : 'btnViewBalance')).classList.add('active');
+
+  if(type === 'balance') {
+    if(BALANCE_PAYMENTS.length === 0) { list.innerHTML = `<p style="text-align:center; color:#888;">ยังไม่มีรายการชำระยอดคงเหลือ</p>`; return; }
+    list.innerHTML = BALANCE_PAYMENTS.map(o => `
+      <div class="order-card" style="border-color:var(--green);">
+        <div class="time">${o.time}</div>
+        <div style="font-size:1.2rem; font-weight:bold;">${o.name}</div>
+        <div style="font-size:0.95rem; color:var(--mid); margin-bottom:12px;">📞 ${o.phone}</div>
+        <div style="font-size:1.2rem; color:var(--green); font-weight:bold;">ยอดโอนเพิ่ม: ฿${Number(o.amount).toLocaleString()}</div>
+        ${o.notes ? `<div style="font-size:0.9rem; margin-top:5px;">📝 ${o.notes}</div>` : ''}
+      </div>
+    `).join('');
+    return;
+  }
+
+  const targetOrders = type === 'cookie' ? ORDERS : MERCH_ORDERS;
   if(targetOrders.length === 0) {
     list.innerHTML = `<p style="text-align:center; color:#888;">ยังไม่มีออเดอร์ในหมวดนี้</p>`;
   } else {
     list.innerHTML = targetOrders.map(o => {
-      // ตกแต่งส่วนที่อยู่ให้สังเกตง่ายๆ ในแอดมิน
       let displayAddress = o.address;
-      if(o.address.includes('[รับที่งาน Vworld]')) {
-         displayAddress = `<span style="background:var(--warm); color:var(--cookie); font-weight:bold; padding:4px 8px; border-radius:6px;">🎪 ${o.address}</span>`;
+      if(o.address.includes('[รับที่งาน Vworld]')) displayAddress = `<span style="background:var(--warm); color:var(--cookie); font-weight:bold; padding:4px 8px; border-radius:6px;">🎪 ${o.address}</span>`;
+      else displayAddress = o.address.replace(/\n/g,'<br>');
+
+      let paymentStatus = "";
+      if(o.paymentType === "มัดจำ 30%") {
+        paymentStatus = `<div style="background:#fbe4e9; color:var(--red); padding:8px; border-radius:8px; margin-top:10px; font-size:0.9rem;">
+          <b>${o.paymentType}</b><br>จ่ายแล้ว: ฿${Number(o.paidAmount).toLocaleString()} | ค้างชำระ: ฿${Number(o.remainingAmount).toLocaleString()}
+        </div>`;
       } else {
-         displayAddress = o.address.replace(/\n/g,'<br>');
+        paymentStatus = `<div style="color:var(--green); margin-top:10px; font-size:0.9rem;"><b>✔️ ${o.paymentType}</b></div>`;
       }
 
       return `
@@ -620,14 +650,14 @@ function renderAdminOrders(type) {
         <div class="phone">📞 ${o.phone}</div>
         <div class="address" style="margin-bottom:12px;">${displayAddress}</div>
         <div class="items">${o.items}</div>
-        <div style="font-size:1.1rem; color:var(--cookie); font-weight:bold; margin-top:10px;">Grand Total: ฿${o.total.toLocaleString()}</div>
+        <div style="font-size:1.1rem; font-weight:bold; margin-top:10px;">Grand Total: ฿${Number(o.total).toLocaleString()}</div>
+        ${paymentStatus}
         ${o.notes ? `<div style="font-size:0.9rem; color:#888; margin-top:5px;">📝 ${o.notes}</div>` : ''}
       </div>
     `}).join('');
   }
 }
 
-// 🌟 ย่อรูปภาพพื้นหลัง 🌟
 function compressBgImage(event) {
   const file = event.target.files[0];
   if(!file) return;
@@ -665,7 +695,6 @@ function clearBgImage() {
   document.getElementById('bgFileInput').value = '';
 }
 
-// 🌟 จัดการเมนู 2 หมวด 🌟
 function renderMenuEditor(type) {
   const container = document.getElementById(type === 'cookie' ? 'menuEditorList_cookie' : 'menuEditorList_merch');
   const targetMenu = type === 'cookie' ? MENU : MERCH_MENU;
@@ -759,33 +788,17 @@ function saveAdminSettings() {
   };
 
   const payload = { 
-    action: "saveAdminSettings", 
-    settings: newSettings, 
-    menu: getMenuData('menuEditorList_cookie'),
-    merchMenu: getMenuData('menuEditorList_merch')
+    action: "saveAdminSettings", settings: newSettings, 
+    menu: getMenuData('menuEditorList_cookie'), merchMenu: getMenuData('menuEditorList_merch')
   };
 
-  fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify(payload)
-  })
+  fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
   .then(() => {
-    btn.disabled = false;
-    btn.textContent = "Save All Settings & Menu";
-    alert("บันทึกการตั้งค่าเรียบร้อยแล้วค่ะ!");
-    SHOP_SETTINGS = newSettings;
-    MENU = payload.menu;
-    MERCH_MENU = payload.merchMenu;
+    btn.disabled = false; btn.textContent = "Save All Settings & Menu"; alert("บันทึกการตั้งค่าเรียบร้อยแล้วค่ะ!");
+    SHOP_SETTINGS = newSettings; MENU = payload.menu; MERCH_MENU = payload.merchMenu;
     applyShopSettings();
-    
-    if(document.getElementById('orderPage').classList.contains('active')){
-      renderMenu(); 
-    }
   }).catch(() => {
-    alert("Error saving settings.");
-    btn.disabled = false;
-    btn.textContent = "Save All Settings & Menu";
+    alert("Error saving settings."); btn.disabled = false; btn.textContent = "Save All Settings & Menu";
   });
 }
 
