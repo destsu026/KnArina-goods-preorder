@@ -26,7 +26,6 @@ body { font-family:'Itim', cursive; background:var(--cream); color:var(--dark); 
 .header p { font-size:1rem; color:var(--mid); line-height:1.6; white-space:pre-wrap; }
 .section-label { font-size:0.9rem; letter-spacing:1px; text-transform:uppercase; color:var(--cookie); margin-bottom:12px; }
 
-/* โหมดปุ่มเลือกสินค้าหน้าแรก */
 .mode-btn-container { display:flex; flex-direction:column; gap:15px; margin-top:30px; }
 .mode-card { background:#fff; border:2px solid var(--light); border-radius:16px; padding:25px; text-align:center; cursor:pointer; transition:all 0.2s; display:flex; flex-direction:column; align-items:center; justify-content:center; }
 .mode-card:hover { border-color:var(--cookie); transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.08); }
@@ -53,9 +52,16 @@ body { font-family:'Itim', cursive; background:var(--cream); color:var(--dark); 
 
 .form-section { background:#fff; border-radius:20px; padding:24px 20px; margin-bottom:18px; border:1.5px solid var(--light); }
 .field { margin-bottom:16px; }
-.field label { display:block; font-size:0.95rem; color:var(--mid); margin-bottom:6px; }
-input, textarea, select { width:100%; padding:12px; border:1.5px solid var(--light); border-radius:10px; font-family:'Itim', cursive; font-size:1rem; background:var(--cream); outline:none; transition:0.2s; }
+.field label { display:block; font-size:1.05rem; color:var(--mid); margin-bottom:8px; font-weight:bold;}
+input[type="text"], input[type="number"], textarea, select { width:100%; padding:12px; border:1.5px solid var(--light); border-radius:10px; font-family:'Itim', cursive; font-size:1rem; background:var(--cream); outline:none; transition:0.2s; }
 input:focus, textarea:focus, select:focus { border-color:var(--cookie); background:#fff; }
+
+/* ดีไซน์ปุ่มเลือกการจัดส่ง */
+.radio-group { display:flex; flex-direction:column; gap:10px; }
+.radio-label { display:flex; align-items:center; gap:10px; padding:12px 15px; border:1.5px solid var(--light); border-radius:12px; cursor:pointer; transition:all 0.2s; background:var(--cream); }
+.radio-label:hover { border-color:var(--cookie); }
+.radio-label input[type="radio"] { accent-color: var(--cookie); transform: scale(1.2); }
+.radio-label.active { border-color:var(--cookie); background:#fffbf5; box-shadow:0 2px 8px rgba(0,0,0,0.05); font-weight:bold; color:var(--cookie); }
 
 .btn { width:100%; padding:16px; border-radius:12px; font-family:'Itim', cursive; font-size:1.15rem; cursor:pointer; transition:0.2s; margin-bottom:10px; border:none; text-align:center; }
 .btn-primary { background:var(--cookie); color:#fff; }
@@ -102,7 +108,7 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
     <h1 id="uiShopNameMain">Arina Shop</h1>
     <p id="uiShopDescMain">ยินดีต้อนรับค่ะ ✨</p>
   </div>
-  <div id="closedBanner">⛔ ขออภัยค่ะ ตอนนี้ปิดรับออเดอร์ชั่วคราว</div>
+  <div id="closedBanner">⛔ ขออภัยค่ะ ตอนนี้ร้านปิดรับออเดอร์ชั่วคราว</div>
   
   <div id="selectModesArea" class="mode-btn-container">
     <div class="mode-card" onclick="selectMode('cookie')">
@@ -118,27 +124,61 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   </div>
 </div>
 
-<!-- หน้า 2: ฟอร์มสั่งซื้อ (ปรับเปลี่ยนตามโหมด) -->
+<!-- หน้า 2: เลือกสินค้า (STEP 1) -->
 <div id="orderPage" class="page container">
   <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('selectPage')">← ย้อนกลับไปเลือกหมวดหมู่</button>
   <div class="header">
-    <h1 id="modeTitle">สั่ง...</h1>
+    <h1 id="modeTitle">เลือกสินค้า</h1>
+    <p>STEP 1: เลือกรายการที่ต้องการ 🛒</p>
   </div>
   
-  <div class="section-label">1. เลือกรายการที่ต้องการ</div>
   <div class="items-list" id="menuList"></div>
   
-  <div class="form-section">
-    <div class="section-label">2. ข้อมูลจัดส่ง</div>
-    <div class="field"><label>ชื่อ-นามสกุล *</label><input type="text" id="fname" placeholder="ชื่อของคุณลูกค้า"></div>
-    <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="fphone" placeholder="ช่องทางการติดต่อ"></div>
-    <div class="field"><label>ที่อยู่จัดส่ง *</label><textarea id="faddress" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea></div>
-    <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="เช่น แพ้ถั่ว, ไซส์เสื้อ, ลายที่ต้องการ..."></div>
-  </div>
-  <button class="btn btn-primary" onclick="goToReview()">Review Order ✦</button>
+  <!-- เปลี่ยนปุ่มเป็น ถัดไป แทน -->
+  <button class="btn btn-primary" onclick="goToShipping()">ถัดไป (กรอกข้อมูลจัดส่ง) ✦</button>
 </div>
 
-<!-- หน้า 3: Review -->
+<!-- หน้า 3: ข้อมูลจัดส่ง (STEP 2) -->
+<div id="shippingPage" class="page container">
+  <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('orderPage')">← ย้อนกลับไปเลือกสินค้า</button>
+  <div class="header">
+    <h1>ข้อมูลการจัดส่ง</h1>
+    <p>STEP 2: กรอกข้อมูลให้ครบถ้วน 📦</p>
+  </div>
+  
+  <div class="form-section">
+    <!-- ตัวเลือกวิธีการรับสินค้า -->
+    <div class="field">
+      <label>วิธีการรับสินค้า *</label>
+      <div class="radio-group">
+        <label class="radio-label active" id="label-shipping">
+          <input type="radio" name="delivMethod" value="shipping" checked onchange="toggleAddress()"> 
+          🚚 จัดส่งตามที่อยู่ (มีค่าจัดส่ง)
+        </label>
+        <label class="radio-label" id="label-pickup">
+          <input type="radio" name="delivMethod" value="pickup" onchange="toggleAddress()"> 
+          🎪 รับที่งาน Vworld (ฟรีค่าจัดส่ง)
+        </label>
+      </div>
+    </div>
+    
+    <div class="field"><label>ชื่อ-นามสกุล *</label><input type="text" id="fname" placeholder="ชื่อของคุณลูกค้า"></div>
+    <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="fphone" placeholder="ช่องทางการติดต่อ"></div>
+    
+    <!-- ซ่อนได้ถ้ารับที่งาน -->
+    <div class="field" id="addressFieldContainer">
+      <label>ที่อยู่จัดส่ง *</label>
+      <textarea id="faddress" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
+    </div>
+    
+    <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="เช่น แพ้ถั่ว, ไซส์เสื้อ, ลายที่ต้องการ..."></div>
+  </div>
+  
+  <button class="btn btn-primary" onclick="goToReview()">ตรวจสอบออเดอร์ (Review) ✦</button>
+</div>
+
+
+<!-- หน้า 4: Review (STEP 3) -->
 <div id="reviewPage" class="page container">
   <div class="header"><h1>Review <em>Order</em></h1></div>
   <div class="r-box">
@@ -152,10 +192,10 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
     <div id="reviewAddress" style="font-size:0.95rem; color:var(--mid); margin-top:5px; line-height:1.5;"></div>
   </div>
   <button class="btn btn-primary" id="btnConfirm" onclick="confirmOrder()">Confirm & Place Order</button>
-  <button class="btn btn-secondary" onclick="showPage('orderPage')">กลับไปแก้ไข</button>
+  <button class="btn btn-secondary" onclick="showPage('shippingPage')">กลับไปแก้ไขข้อมูล</button>
 </div>
 
-<!-- หน้า 4: Thank You (TipMe) -->
+<!-- หน้า 5: Thank You (TipMe) -->
 <div id="thankPage" class="page container" style="text-align:center; padding-top:40px;">
   <div style="font-size:4rem; margin-bottom:10px;">🤎</div>
   <h2 style="font-family:'Lora'; margin-bottom:10px;">Order Received!</h2>
@@ -226,7 +266,7 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
       </div>
       <div class="field"><label>ชื่อร้าน (Shop Name)</label><input type="text" id="setShopName"></div>
       <div class="field"><label>ข้อความต้อนรับ</label><textarea id="setShopDesc"></textarea></div>
-      <div class="field"><label>ค่าจัดส่ง (฿)</label><input type="number" id="setShippingFee"></div>
+      <div class="field"><label>ค่าจัดส่ง (฿) - *ถ้าลูกค้าเลือกรับงาน Vworld จะกลายเป็น 0 ให้อัตโนมัติ*</label><input type="number" id="setShippingFee"></div>
       <div class="field"><label>Theme Color (คลิกเพื่อเลือกสี)</label><input type="color" id="setThemeColor" style="height:50px; cursor:pointer; padding: 5px;"></div>
       <div class="field">
         <label>ภาพพื้นหลัง (วางลิงก์รูป หรือ อัปโหลดจากเครื่อง)</label>
@@ -260,7 +300,7 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 
 <script>
 // ════════════════════════════════════════════════════════════
-const API_URL = "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้"; 
+const API_URL = "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec"; 
 const ADMIN_PIN = "admin1234";
 // ════════════════════════════════════════════════════════════
 
@@ -272,11 +312,11 @@ let MERCH_ORDERS = []; // ออเดอร์สินค้า
 
 let cartCookie = {};
 let cartMerch = {};
-let currentMode = "cookie"; // 'cookie' หรือ 'merch'
+let currentMode = "cookie"; 
 let currentOrder = null;
 
 window.onload = () => {
-  if (API_URL === "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec") {
+  if (API_URL === "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้") {
     alert("อย่าลืมนำ API_URL มาใส่ในโค้ดนะคะ 🤎");
     document.getElementById('loadingScreen').style.display = 'none';
     return;
@@ -379,17 +419,48 @@ function changeQty(id, delta) {
   }
 }
 
+// 🌟 STEP 1 -> STEP 2 🌟
+function goToShipping() {
+  const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
+  if (Object.keys(targetCart).length === 0) return alert('กรุณาเลือกสินค้าอย่างน้อย 1 ชิ้นค่ะ ✨');
+  showPage('shippingPage');
+}
+
+// 🌟 สลับช่องที่อยู่ (ซ่อน/แสดง) 🌟
+function toggleAddress() {
+  const method = document.querySelector('input[name="delivMethod"]:checked').value;
+  const labelShipping = document.getElementById('label-shipping');
+  const labelPickup = document.getElementById('label-pickup');
+
+  if(method === 'shipping') {
+    document.getElementById('addressFieldContainer').style.display = 'block';
+    labelShipping.classList.add('active');
+    labelPickup.classList.remove('active');
+  } else {
+    document.getElementById('addressFieldContainer').style.display = 'none';
+    labelPickup.classList.add('active');
+    labelShipping.classList.remove('active');
+  }
+}
+
+// 🌟 STEP 2 -> STEP 3 (Review) 🌟
 function goToReview() {
   const name = document.getElementById('fname').value.trim();
   const phone = document.getElementById('fphone').value.trim();
-  const address = document.getElementById('faddress').value.trim();
   const notes = document.getElementById('fnotes').value.trim();
+  const delivMethod = document.querySelector('input[name="delivMethod"]:checked').value;
+  let address = "";
+
+  if (!name || !phone) return alert('กรุณากรอกชื่อและช่องทางการติดต่อให้ครบถ้วนค่ะ');
+
+  // ตรวจสอบที่อยู่เฉพาะกรณีจัดส่ง
+  if (delivMethod === 'shipping') {
+    address = document.getElementById('faddress').value.trim();
+    if (!address) return alert('กรุณากรอกที่อยู่จัดส่งค่ะ');
+  }
 
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
   const targetMenu = currentMode === 'cookie' ? MENU : MERCH_MENU;
-
-  if (!name || !phone || !address) return alert('กรุณากรอกข้อมูลจัดส่งให้ครบถ้วนค่ะ');
-  if (Object.keys(targetCart).length === 0) return alert('กรุณาเลือกสินค้าอย่างน้อย 1 ชิ้นนะคะ');
 
   const items = Object.entries(targetCart).map(([id, qty]) => {
     const m = targetMenu.find(x => x.id === id);
@@ -397,17 +468,25 @@ function goToReview() {
   });
   
   const subtotal = items.reduce((s, i) => s+i.subtotal, 0);
-  const shipping = Number(SHOP_SETTINGS.shippingFee) || 0;
+  
+  // 💡 ลอจิกค่าจัดส่งฟรี ถ้ารับที่งาน Vworld
+  const shipping = delivMethod === 'shipping' ? (Number(SHOP_SETTINGS.shippingFee) || 0) : 0;
   const grandTotal = subtotal + shipping;
 
   const itemsForDb = [...items];
   if(shipping > 0) itemsForDb.push({ name: "+ ค่าจัดส่ง", qty: 1, subtotal: shipping });
 
+  // สร้างออบเจกต์จัดเก็บออเดอร์
   currentOrder = {
     action: "newOrder",
-    orderType: currentMode, // สำคัญ! ส่งไปบอกหลังบ้านว่าเป็นออเดอร์ประเภทไหน
+    orderType: currentMode,
     time: new Date().toLocaleString('th-TH'),
-    name, phone, address, notes, items: itemsForDb, total: grandTotal
+    name, 
+    phone, 
+    address: delivMethod === 'shipping' ? `[จัดส่ง] ${address}` : `[รับที่งาน Vworld]`, 
+    notes, 
+    items: itemsForDb, 
+    total: grandTotal
   };
 
   document.getElementById('reviewItems').innerHTML = items.map(it => 
@@ -415,10 +494,16 @@ function goToReview() {
   ).join('');
   
   document.getElementById('reviewSubtotal').textContent = `฿${subtotal}`;
-  document.getElementById('reviewShipping').textContent = `฿${shipping}`;
+  document.getElementById('reviewShipping').textContent = shipping === 0 ? "ฟรี (Free)" : `฿${shipping}`;
   document.getElementById('reviewTotal').textContent = `฿${grandTotal}`;
   document.getElementById('reviewContact').textContent = `${name} (${phone})`;
-  document.getElementById('reviewAddress').innerHTML = address.replace(/\n/g,'<br>');
+  
+  // แสดงผลในหน้าจอ Review
+  if(delivMethod === 'shipping') {
+    document.getElementById('reviewAddress').innerHTML = "📍 จัดส่งถึงบ้าน:<br>" + address.replace(/\n/g,'<br>');
+  } else {
+    document.getElementById('reviewAddress').innerHTML = "🎪 <b>รับสินค้าด้วยตัวเองที่งาน Vworld</b>";
+  }
 
   showPage('reviewPage');
 }
@@ -448,7 +533,12 @@ function confirmOrder() {
 function resetAndGoHome() {
   cartCookie = {};
   cartMerch = {};
+  
+  // ล้างฟอร์ม
   ['fname','fphone','faddress','fnotes'].forEach(id => document.getElementById(id).value = '');
+  document.querySelector('input[value="shipping"]').checked = true;
+  toggleAddress();
+  
   showPage('selectPage');
 }
 
@@ -514,17 +604,26 @@ function renderAdminOrders(type) {
   if(targetOrders.length === 0) {
     list.innerHTML = `<p style="text-align:center; color:#888;">ยังไม่มีออเดอร์ในหมวดนี้</p>`;
   } else {
-    list.innerHTML = targetOrders.map(o => `
+    list.innerHTML = targetOrders.map(o => {
+      // ตกแต่งส่วนที่อยู่ให้สังเกตง่ายๆ ในแอดมิน
+      let displayAddress = o.address;
+      if(o.address.includes('[รับที่งาน Vworld]')) {
+         displayAddress = `<span style="background:var(--warm); color:var(--cookie); font-weight:bold; padding:4px 8px; border-radius:6px;">🎪 ${o.address}</span>`;
+      } else {
+         displayAddress = o.address.replace(/\n/g,'<br>');
+      }
+
+      return `
       <div class="order-card">
         <div class="time">${o.time}</div>
         <div class="name">${o.name}</div>
         <div class="phone">📞 ${o.phone}</div>
-        <div class="address">${o.address.replace(/\n/g,'<br>')}</div>
+        <div class="address" style="margin-bottom:12px;">${displayAddress}</div>
         <div class="items">${o.items}</div>
         <div style="font-size:1.1rem; color:var(--cookie); font-weight:bold; margin-top:10px;">Grand Total: ฿${o.total.toLocaleString()}</div>
         ${o.notes ? `<div style="font-size:0.9rem; color:#888; margin-top:5px;">📝 ${o.notes}</div>` : ''}
       </div>
-    `).join('');
+    `}).join('');
   }
 }
 
@@ -680,7 +779,6 @@ function saveAdminSettings() {
     MERCH_MENU = payload.merchMenu;
     applyShopSettings();
     
-    // ถ้าหน้าจอปัจจุบันอยู่หน้าสั่งของ ให้เรนเดอร์เมนูใหม่ด้วย
     if(document.getElementById('orderPage').classList.contains('active')){
       renderMenu(); 
     }
