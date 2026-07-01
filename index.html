@@ -44,9 +44,10 @@ body { font-family:'Itim', cursive; background:var(--cream); color:var(--dark); 
 .item-info span { font-size:0.9rem; color:var(--mid); line-height:1.3; display:block; }
 .item-price { color:var(--cookie); font-size:1.1rem; font-weight:bold; }
 
-.item-opt-select { margin-top:6px; padding:6px 10px; border-radius:8px; font-family:'Itim', cursive; font-size:0.95rem; border:1.5px solid var(--cookie); background:#fff; color:var(--dark); outline:none; max-width:100%; width: 100%; cursor:pointer; }
+/* ดีไซน์ Dropdown */
+.item-opt-select { margin-top:8px; padding:6px 10px; border-radius:8px; font-family:'Itim', cursive; font-size:0.95rem; border:1.5px solid var(--cookie); background:#fff; color:var(--dark); outline:none; max-width:100%; width: 100%; cursor:pointer; }
 
-.qty-wrap { display:none; align-items:center; gap:8px; margin-top:8px; }
+.qty-wrap { display:none; align-items:center; gap:8px; margin-top:10px; }
 .item-row.selected .qty-wrap { display:flex; }
 .qbtn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--cookie); background:none; color:var(--cookie); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
 .qbtn:hover { background:var(--cookie); color:#fff; }
@@ -103,7 +104,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <h3 style="color:var(--cookie); font-family:'Lora'">Loading Shop...</h3>
 </div>
 
-<!-- หน้า 1: เลือกระบบ -->
 <div id="selectPage" class="page container active">
   <div class="header">
     <h1 id="uiShopNameMain">Arina Shop</h1>
@@ -130,7 +130,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   </div>
 </div>
 
-<!-- หน้า 2: เลือกสินค้า -->
 <div id="orderPage" class="page container">
   <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('selectPage')">← ย้อนกลับ</button>
   <div class="header">
@@ -141,7 +140,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <button class="btn btn-primary" onclick="goToShipping()">ถัดไป (กรอกข้อมูลจัดส่ง) ✦</button>
 </div>
 
-<!-- หน้า 3: ข้อมูลจัดส่ง -->
 <div id="shippingPage" class="page container">
   <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('orderPage')">← ย้อนกลับไปเลือกสินค้า</button>
   <div class="header">
@@ -172,7 +170,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <button class="btn btn-primary" onclick="goToReview()">ตรวจสอบออเดอร์ (Review) ✦</button>
 </div>
 
-<!-- หน้า 4: Review และเลือกวิธีชำระเงิน -->
 <div id="reviewPage" class="page container">
   <div class="header"><h1>Review <em>Order</em></h1></div>
   <div class="r-box">
@@ -220,7 +217,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <button class="btn btn-secondary" onclick="showPage('shippingPage')">กลับไปแก้ไขข้อมูล</button>
 </div>
 
-<!-- หน้าจ่ายส่วนที่เหลือ (Balance) -->
 <div id="payBalancePage" class="page container">
   <button class="btn-secondary btn-small" style="margin-bottom:20px;" onclick="showPage('selectPage')">← ย้อนกลับ</button>
   <div class="header">
@@ -237,7 +233,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <button class="btn btn-primary" style="background:var(--green);" onclick="submitBalance()">แจ้งโอนเงิน ✦</button>
 </div>
 
-<!-- หน้า 5: Thank You (Eazy Donate) -->
 <div id="thankPage" class="page container" style="text-align:center; padding-top:40px;">
   <div style="font-size:4rem; margin-bottom:10px;">🤎</div>
   <h2 style="font-family:'Lora'; margin-bottom:10px;" id="tyTitle">Order Received!</h2>
@@ -260,7 +255,6 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <button class="btn btn-secondary" onclick="resetAndGoHome()">กลับหน้าแรก</button>
 </div>
 
-<!-- ระบบ Admin -->
 <div id="adminLoginPage" class="page container">
   <div class="admin-login-box">
     <h2 style="font-family: 'Lora';">Admin Access</h2>
@@ -339,7 +333,7 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
 
 <script>
 // ════════════════════════════════════════════════════════════
-const API_URL = "ใhttps://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec"; 
+const API_URL = "https://script.google.com/macros/s/AKfycbwuDnms9rcXGIif9yoUMfs45FoVzXr2zG6-QPTPxarKFM2VPpkbXtOOCm7wHcPLfAh_/exec"; 
 const ADMIN_PIN = "admin8616";
 // ════════════════════════════════════════════════════════════
 
@@ -405,13 +399,19 @@ function selectMode(mode) {
   showPage('orderPage');
 }
 
-// 🌟 ระบบตีความตัวเลือกและราคา 🌟
+// 🌟 ระบบตีความตัวเลือกและราคา (พิมพ์ยังไงก็ไม่พัง) 🌟
 function parseOptions(m) {
-  let optsRaw = m.options ? m.options.split(',').map(s=>s.trim()).filter(s=>s) : [];
+  if(!m.options) return [];
+  let optsRaw = String(m.options).split(',').map(s=>s.trim()).filter(s=>s);
   return optsRaw.map(optStr => {
     let parts = optStr.split('=');
-    if(parts.length > 1) return { name: parts[0].trim(), price: parseFloat(parts[1].trim()) || m.price };
-    return { name: optStr, price: m.price };
+    if(parts.length > 1) {
+      // ดึงมาแค่ตัวเลข เพื่อป้องกันกรณีแอดมินพิมพ์ ฿ หรือเว้นวรรคผิด
+      let priceStr = parts[1].replace(/[^0-9.]/g, ''); 
+      let p = parseFloat(priceStr);
+      return { name: parts[0].trim(), price: isNaN(p) ? Number(m.price) : p };
+    }
+    return { name: optStr.trim(), price: Number(m.price) };
   });
 }
 
@@ -431,7 +431,7 @@ function renderMenu() {
       targetOptions[m.id] = currentOpt;
     }
     
-    let displayPrice = m.price;
+    let displayPrice = Number(m.price);
     if(parsedOpts.length > 0) {
        let found = parsedOpts.find(o => o.name === currentOpt);
        if(found) displayPrice = found.price;
@@ -541,12 +541,11 @@ function goToReview() {
   const targetCart = currentMode === 'cookie' ? cartCookie : cartMerch;
   const targetMenu = currentMode === 'cookie' ? MENU : MERCH_MENU;
   
-  // จัดการดึงราคาตามตัวเลือก
   const items = Object.entries(targetCart).map(([key, qty]) => {
     const [id, opt] = key.split('@@');
     const m = targetMenu.find(x => x.id === id);
     
-    let itemPrice = m.price;
+    let itemPrice = Number(m.price);
     if(opt && m.options) {
        let parsedOpts = parseOptions(m);
        let found = parsedOpts.find(o => o.name === opt);
@@ -596,355 +595,4 @@ function goToReview() {
   if(delivMethod === 'shipping') document.getElementById('reviewAddress').innerHTML = "📍 จัดส่งถึงบ้าน:<br>" + address.replace(/\n/g,'<br>');
   else document.getElementById('reviewAddress').innerHTML = "🎪 <b>รับสินค้าด้วยตัวเองที่งาน Vworld</b>";
   
-  document.getElementById('reviewContact').innerHTML = `${name} <br><span style="font-size:0.9rem; font-weight:normal; color:var(--mid);">📞 ${phone} | ✉️ ${email}</span>`;
-
-  updatePaymentMode(); 
-  showPage('reviewPage'); 
-}
-
-function updatePaymentMode() {
-  if(!currentOrder) return;
-  const payMethod = document.querySelector('input[name="payMethod"]:checked').value;
-  const grandTotal = currentOrder.total;
-  
-  if(payMethod === '30') {
-    const deposit = Math.ceil(grandTotal * 0.3);
-    const remain = grandTotal - deposit;
-    currentOrder.paymentType = "มัดจำ 30%";
-    currentOrder.paidAmount = deposit;
-    currentOrder.remainingAmount = remain;
-    
-    document.getElementById('depositWarning').style.display = 'block';
-    document.getElementById('label-pay30').classList.add('active');
-    document.getElementById('label-pay100').classList.remove('active');
-    
-    document.getElementById('reviewTotalText').innerHTML = `
-      ยอดรวมทั้งหมด: ฿${grandTotal.toLocaleString()}<br>
-      <span style="color:var(--red); font-size:1.3rem;">ต้องชำระวันนี้ (30%): ฿${deposit.toLocaleString()}</span><br>
-      <span style="font-size:1rem; color:var(--mid);">ยอดคงเหลือ: ฿${remain.toLocaleString()}</span>
-    `;
-  } else {
-    currentOrder.paymentType = "เต็มจำนวน 100%";
-    currentOrder.paidAmount = grandTotal;
-    currentOrder.remainingAmount = 0;
-    
-    document.getElementById('depositWarning').style.display = 'none';
-    document.getElementById('label-pay100').classList.add('active');
-    document.getElementById('label-pay30').classList.remove('active');
-    
-    document.getElementById('reviewTotalText').innerHTML = `
-      <span style="color:var(--cookie);">ยอดชำระวันนี้ (100%): ฿${grandTotal.toLocaleString()}</span>
-    `;
-  }
-}
-
-function confirmOrder() {
-  const btn = document.getElementById('btnConfirm');
-  btn.disabled = true;
-  btn.textContent = "กำลังส่งออเดอร์...";
-  
-  document.getElementById('thankYouTotal').textContent = '฿' + currentOrder.paidAmount.toLocaleString();
-  document.getElementById('tyTitle').textContent = "Order Received!";
-  document.getElementById('tySubtitle').textContent = "ได้รับออเดอร์แล้ว ขอบคุณที่อุดหนุนอารินะนะคะ♥";
-
-  fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(currentOrder) })
-  .then(() => { btn.disabled = false; btn.textContent = "ยืนยันและสั่งซื้อ"; showPage('thankPage'); })
-  .catch(() => { alert("บันทึกออฟไลน์เรียบร้อย"); btn.disabled = false; btn.textContent = "ยืนยันและสั่งซื้อ"; showPage('thankPage'); });
-}
-
-function submitBalance() {
-  const name = document.getElementById('bname').value.trim();
-  const phone = document.getElementById('bphone').value.trim();
-  const email = document.getElementById('bemail').value.trim();
-  const amount = Number(document.getElementById('bamount').value) || 0;
-  const notes = document.getElementById('bnotes').value.trim();
-
-  if(!name || !phone || !email || amount <= 0) return alert('กรุณากรอกชื่อ, อีเมล, เบอร์โทร และยอดเงินที่โอนให้ครบถ้วนค่ะ');
-  
-  const payload = { action: "payBalance", time: new Date().toLocaleString('th-TH'), name, phone, email, amount, notes };
-
-  document.getElementById('thankYouTotal').textContent = '฿' + amount.toLocaleString();
-  document.getElementById('tyTitle').textContent = "Payment Noted!";
-  document.getElementById('tySubtitle').textContent = "รับทราบยอดโอนคงเหลือแล้วค่ะ ขอบคุณนะคะ♥";
-
-  fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
-  .then(() => { showPage('thankPage'); })
-  .catch(() => { showPage('thankPage'); });
-}
-
-function resetAndGoHome() {
-  cartCookie = {}; cartMerch = {};
-  ['fname','fphone','femail','faddress','fnotes','bname','bphone','bemail','bamount','bnotes'].forEach(id => {
-      const el = document.getElementById(id);
-      if(el) el.value = '';
-  });
-  document.querySelector('input[value="shipping"]').checked = true;
-  toggleAddress();
-  showPage('selectPage');
-}
-
-function loginAdmin() {
-  if (document.getElementById('adminPin').value === ADMIN_PIN) {
-    document.getElementById('adminPin').value = ''; showPage('ownerPage'); loadAdminData();
-  } else { alert("รหัสผ่านไม่ถูกต้อง"); }
-}
-
-function switchAdminTab(tabId, btnEl) {
-  document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  btnEl.classList.add('active');
-}
-
-function loadAdminData() {
-  document.getElementById('adminOrdersList').innerHTML = "กำลังโหลดข้อมูล...";
-  fetch(`${API_URL}?action=getAdminData`)
-    .then(res => res.json())
-    .then(data => {
-      ORDERS = data.orders || [];
-      MERCH_ORDERS = data.merchOrders || [];
-      BALANCE_PAYMENTS = data.balancePayments || [];
-      SHOP_SETTINGS = data.settings;
-      MENU = data.menu || [];
-      MERCH_MENU = data.merchMenu || [];
-      
-      const totalCount = ORDERS.length + MERCH_ORDERS.length;
-      const totalRev = ORDERS.reduce((sum, o) => sum + Number(o.total), 0) + MERCH_ORDERS.reduce((sum, o) => sum + Number(o.total), 0);
-      
-      document.getElementById('statCount').textContent = totalCount;
-      document.getElementById('statRev').textContent = `฿${totalRev.toLocaleString()}`;
-
-      renderAdminOrders('cookie'); 
-
-      document.getElementById('setIsOpen').value = SHOP_SETTINGS.isOpen ? "true" : "false";
-      document.getElementById('setIsCookieOpen').value = SHOP_SETTINGS.isCookieOpen !== false ? "true" : "false";
-      document.getElementById('setShopName').value = SHOP_SETTINGS.shopName;
-      document.getElementById('setShopDesc').value = SHOP_SETTINGS.shopDesc;
-      document.getElementById('setShippingFee').value = SHOP_SETTINGS.shippingFee || 0;
-      document.getElementById('setThemeColor').value = SHOP_SETTINGS.themeColor || "#c8873b";
-      
-      const savedBg = SHOP_SETTINGS.bgImage || "";
-      document.getElementById('setBgImage').value = savedBg;
-      updateBgPreview();
-
-      renderMenuEditor('cookie');
-      renderMenuEditor('merch');
-    });
-}
-
-function renderAdminOrders(type) {
-  document.getElementById('btnViewCookie').classList.remove('active');
-  document.getElementById('btnViewMerch').classList.remove('active');
-  document.getElementById('btnViewBalance').classList.remove('active');
-  
-  const list = document.getElementById('adminOrdersList');
-  document.getElementById(type === 'cookie' ? 'btnViewCookie' : (type === 'merch' ? 'btnViewMerch' : 'btnViewBalance')).classList.add('active');
-
-  if(type === 'balance') {
-    if(BALANCE_PAYMENTS.length === 0) { list.innerHTML = `<p style="text-align:center; color:#888;">ยังไม่มีรายการชำระยอดคงเหลือ</p>`; return; }
-    list.innerHTML = BALANCE_PAYMENTS.map(o => `
-      <div class="order-card" style="border-color:var(--green);">
-        <div class="time">${o.time}</div>
-        <div style="font-size:1.2rem; font-weight:bold;">${o.name}</div>
-        <div style="font-size:0.95rem; color:var(--mid); margin-bottom:12px;">📞 ${o.phone} | ✉️ ${o.email || '-'}</div>
-        <div style="font-size:1.2rem; color:var(--green); font-weight:bold;">ยอดโอนเพิ่ม: ฿${Number(o.amount).toLocaleString()}</div>
-        ${o.notes ? `<div style="font-size:0.9rem; margin-top:5px;">📝 ${o.notes}</div>` : ''}
-      </div>
-    `).join('');
-    return;
-  }
-
-  const targetOrders = type === 'cookie' ? ORDERS : MERCH_ORDERS;
-  if(targetOrders.length === 0) {
-    list.innerHTML = `<p style="text-align:center; color:#888;">ยังไม่มีออเดอร์ในหมวดนี้</p>`;
-  } else {
-    list.innerHTML = targetOrders.map(o => {
-      let displayAddress = o.address;
-      if(o.address.includes('[รับที่งาน Vworld]')) displayAddress = `<span style="background:var(--warm); color:var(--cookie); font-weight:bold; padding:4px 8px; border-radius:6px;">🎪 ${o.address}</span>`;
-      else displayAddress = o.address.replace(/\n/g,'<br>');
-
-      let paymentStatus = "";
-      if(o.paymentType === "มัดจำ 30%") {
-        paymentStatus = `<div style="background:#fbe4e9; color:var(--red); padding:8px; border-radius:8px; margin-top:10px; font-size:0.9rem;">
-          <b>${o.paymentType}</b><br>จ่ายแล้ว: ฿${Number(o.paidAmount).toLocaleString()} | ค้างชำระ: ฿${Number(o.remainingAmount).toLocaleString()}
-        </div>`;
-      } else {
-        paymentStatus = `<div style="color:var(--green); margin-top:10px; font-size:0.9rem;"><b>✔️ ${o.paymentType}</b></div>`;
-      }
-
-      let cardBadge = o.randomCards > 0 ? `<div style="font-size:0.95rem; color:var(--green); margin-top:5px; font-weight:bold; background:#e8f5e9; padding:5px 10px; border-radius:5px; display:inline-block;">🎟️ บัตรสุ่มขนม: ${o.randomCards} ใบ</div>` : '';
-
-      return `
-      <div class="order-card">
-        <div class="time">${o.time}</div>
-        <div class="name">${o.name}</div>
-        <div class="phone" style="font-size:0.9rem; color:var(--mid); margin-bottom:12px;">📞 ${o.phone} | ✉️ ${o.email || '-'}</div>
-        <div class="address" style="margin-bottom:12px;">${displayAddress}</div>
-        <div class="items">${o.items}</div>
-        <div style="font-size:1.1rem; font-weight:bold; margin-top:10px;">Grand Total: ฿${Number(o.total).toLocaleString()}</div>
-        ${paymentStatus}
-        ${cardBadge}
-        ${o.notes ? `<div style="font-size:0.9rem; color:#888; margin-top:5px;">📝 ${o.notes}</div>` : ''}
-      </div>
-    `}).join('');
-  }
-}
-
-function compressBgImage(event) {
-  const file = event.target.files[0];
-  if(!file) return;
-  document.getElementById('bgPreview').style.display = 'none';
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = new Image();
-    img.onload = function() {
-      const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 1200; 
-      let width = img.width; let height = img.height;
-      if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-      canvas.width = width; canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, width, height);
-      const dataUrl = canvas.toDataURL('image/webp', 0.6);
-      document.getElementById('bgPreview').src = dataUrl;
-      document.getElementById('bgPreview').style.display = 'block';
-      document.getElementById('setBgImage').value = dataUrl;
-    }
-    img.src = e.target.result;
-  }
-  reader.readAsDataURL(file);
-}
-
-function updateBgPreview() {
-  const val = document.getElementById('setBgImage').value;
-  if(val) { document.getElementById('bgPreview').src = val; document.getElementById('bgPreview').style.display = 'block'; } 
-  else { document.getElementById('bgPreview').style.display = 'none'; }
-}
-
-function clearBgImage() {
-  document.getElementById('bgPreview').style.display = 'none';
-  document.getElementById('setBgImage').value = '';
-  document.getElementById('bgFileInput').value = '';
-}
-
-function renderMenuEditor(type) {
-  const container = document.getElementById(type === 'cookie' ? 'menuEditorList_cookie' : 'menuEditorList_merch');
-  const targetMenu = type === 'cookie' ? MENU : MERCH_MENU;
-
-  container.innerHTML = targetMenu.map((m, index) => {
-    const imgSrc = m.image ? m.image : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-    return `
-    <div class="edit-menu-row">
-      <div class="img-upload-box">
-        <img src="${imgSrc}" class="img-preview" id="preview-${type}-${index}">
-        <input type="text" placeholder="วางลิงก์รูปลงที่นี่" class="m-image" id="url-${type}-${index}" value="${m.image || ''}" style="font-size:0.8rem; margin-bottom:5px;" oninput="document.getElementById('preview-${type}-${index}').src=this.value">
-        <input type="file" style="width:100%; font-size:0.8rem;" accept="image/*" onchange="compressAndPreview(event, ${index}, '${type}')">
-      </div>
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <input type="text" placeholder="ชื่อรายการ" value="${m.name}" class="m-name" style="padding:8px;">
-        <input type="text" placeholder="คำอธิบาย..." value="${m.desc}" class="m-desc" style="padding:8px;">
-        <label style="font-size:0.9rem; font-weight:bold; color:var(--cookie);">ตัวเลือกสินค้า (ใส่ = เพื่อตั้งราคาต่างกัน)</label>
-        <input type="text" placeholder="เช่น 35x60cm=350, 40x90cm=450" value="${m.options || ''}" class="m-options" style="padding:8px; font-size:0.85rem; border:1px solid var(--cookie);">
-        <input type="hidden" value="${m.id}" class="m-id">
-      </div>
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <label style="font-size:0.9rem; font-weight:bold;">ราคาหลัก (฿)</label>
-        <input type="number" placeholder="ราคา" value="${m.price}" class="m-price" style="width:100%; padding:8px;">
-        <button class="del-btn" onclick="removeMenuItem(${index}, '${type}')">ลบรายการนี้</button>
-      </div>
-    </div>
-    `;
-  }).join('');
-}
-
-function compressAndPreview(event, index, type) {
-  const file = event.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = new Image();
-    img.onload = function() {
-      const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 300; 
-      let width = img.width; let height = img.height;
-      if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-      canvas.width = width; canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, width, height);
-      const dataUrl = canvas.toDataURL('image/webp', 0.65); 
-      document.getElementById(`preview-${type}-${index}`).src = dataUrl;
-      document.getElementById(`url-${type}-${index}`).value = dataUrl;
-    }
-    img.src = e.target.result;
-  }
-  reader.readAsDataURL(file);
-}
-
-function addMenuItem(type) {
-  if(type === 'cookie') MENU.push({ id: 'c' + Date.now(), image: '', name: '', desc: '', price: 0, options: '' });
-  else MERCH_MENU.push({ id: 'p' + Date.now(), image: '', name: '', desc: '', price: 0, options: '' });
-  renderMenuEditor(type);
-}
-
-function removeMenuItem(index, type) {
-  if(confirm("แน่ใจหรือไม่ที่จะลบรายการนี้?")) {
-    if(type === 'cookie') MENU.splice(index, 1);
-    else MERCH_MENU.splice(index, 1);
-    renderMenuEditor(type);
-  }
-}
-
-function saveAdminSettings() {
-  const btn = document.getElementById('btnSaveAdmin');
-  btn.disabled = true;
-  btn.textContent = "กำลังบันทึก...";
-
-  const newSettings = {
-    isOpen: document.getElementById('setIsOpen').value === "true",
-    isCookieOpen: document.getElementById('setIsCookieOpen').value === "true",
-    shopName: document.getElementById('setShopName').value,
-    shopDesc: document.getElementById('setShopDesc').value,
-    shippingFee: Number(document.getElementById('setShippingFee').value) || 0,
-    themeColor: document.getElementById('setThemeColor').value,
-    bgImage: document.getElementById('setBgImage').value
-  };
-
-  const getMenuData = (containerId) => {
-    const arr = [];
-    document.querySelectorAll(`#${containerId} .edit-menu-row`).forEach((row) => {
-      arr.push({
-        id: row.querySelector('.m-id').value,
-        image: row.querySelector('.m-image').value,
-        name: row.querySelector('.m-name').value,
-        price: Number(row.querySelector('.m-price').value),
-        desc: row.querySelector('.m-desc').value,
-        options: row.querySelector('.m-options').value
-      });
-    });
-    return arr;
-  };
-
-  const payload = { 
-    action: "saveAdminSettings", settings: newSettings, 
-    menu: getMenuData('menuEditorList_cookie'), merchMenu: getMenuData('menuEditorList_merch')
-  };
-
-  fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
-  .then(() => {
-    btn.disabled = false; btn.textContent = "Save All Settings & Menu"; alert("บันทึกการตั้งค่าเรียบร้อยแล้วค่ะ!");
-    SHOP_SETTINGS = newSettings; MENU = payload.menu; MERCH_MENU = payload.merchMenu;
-    applyShopSettings();
-    if(document.getElementById('orderPage').classList.contains('active')){ renderMenu(); }
-  }).catch(() => {
-    alert("Error saving settings."); btn.disabled = false; btn.textContent = "Save All Settings & Menu";
-  });
-}
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-</script>
-</body>
-</html>
+  document.getElementById('reviewContact').innerHTML = `${
