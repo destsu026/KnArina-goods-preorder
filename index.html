@@ -165,7 +165,7 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
       <label>ที่อยู่จัดส่ง *</label>
       <textarea id="faddress" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
     </div>
-    <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="เช่น แพ้ถั่ว, รายละเอียดเพิ่มเติม..."></div>
+    <div class="field"><label>หมายเหตุ (optional)</label><input type="text" id="fnotes" placeholder="สิ่งที่อยากบอกอารินะ."></div>
   </div>
   <button class="btn btn-primary" onclick="goToReview()">ตรวจสอบออเดอร์ (Review) ✦</button>
 </div>
@@ -199,7 +199,7 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
       </label>
     </div>
     <div id="depositWarning" style="display:none; font-size:0.9rem; color:var(--red); margin-top:10px; line-height:1.4; background:#fbe4e9; padding:10px; border-radius:8px;">
-      ⚠️ <b>เงื่อนไขมัดจำ:</b> ขอสงวนสิทธิ์ไม่คืนเงินหากยกเลิกออเดอร์หลังวันที่ 14 และร้านจะจัดส่งสินค้าเมื่อชำระส่วนที่เหลือครบถ้วนแล้วเท่านั้นค่ะ
+      ⚠️ <b>เงื่อนไขมัดจำ:</b> ขอสงวนสิทธิ์ไม่คืนเงินหากยกเลิกออเดอร์หลังวันที่ 14 และอารินะจะจัดส่งสินค้าเมื่อชำระส่วนที่เหลือครบถ้วนแล้วเท่านั้นค่ะ
     </div>
   </div>
 
@@ -226,9 +226,9 @@ footer a { color:var(--dark); text-decoration:none; cursor:pointer; font-weight:
   <div class="form-section" style="border-color:var(--green);">
     <div class="field"><label>ชื่อ-นามสกุลที่สั่งซื้อ *</label><input type="text" id="bname" placeholder="ชื่อที่ใช้สั่งซื้อออเดอร์"></div>
     <div class="field"><label>อีเมล (Email) *</label><input type="email" id="bemail" placeholder="example@email.com"></div>
-    <div class="field"><label>เบอร์โทรศัพท์ / LINE ID *</label><input type="text" id="bphone" placeholder="ช่องทางการติดต่อ"></div>
+    <div class="field"><label>เบอร์โทรศัพท์ *</label><input type="text" id="bphone" placeholder="ช่องทางการติดต่อ"></div>
     <div class="field"><label>ยอดเงินที่โอนเพิ่ม (฿) *</label><input type="number" id="bamount" placeholder="ยอดเงินส่วนที่เหลือ"></div>
-    <div class="field"><label>หมายเหตุ / รหัสออเดอร์ (optional)</label><input type="text" id="bnotes" placeholder="เผื่อแม่ค้าหาง่ายขึ้นค่ะ"></div>
+    <div class="field"><label>หมายเหตุ(optional)</label><input type="text" id="bnotes" placeholder="สิ่งที่อยากบอกอารินะ"></div>
   </div>
   <button class="btn btn-primary" style="background:var(--green);" onclick="submitBalance()">แจ้งโอนเงิน ✦</button>
 </div>
