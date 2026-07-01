@@ -555,7 +555,7 @@ function goToReview() {
 
   const itemsForDb = [...items];
   
-  if(subtotal >= 1000) {
+  if(subtotal >= 0) {
     itemsForDb.push({ name: "🎁 Exclusive Voice Pack (ส่งทางอีเมล)", qty: 1, subtotal: 0 });
     document.getElementById('reviewExclusive').style.display = 'block';
   } else {
