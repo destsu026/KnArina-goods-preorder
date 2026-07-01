@@ -347,7 +347,7 @@ let currentMode = "cookie";
 let currentOrder = null;
 
 window.onload = () => {
-  if (API_URL === "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้") return alert("อย่าลืมใส่ API_URL นะคะ 🤎");
+  //if (API_URL === "ใส่ลิงก์_WEB_APP_URL_ของคูณเบลล์ตรงนี้") return alert("อย่าลืมใส่ API_URL นะคะ 🤎");
   fetch(`${API_URL}?action=getShopData`)
     .then(res => res.json())
     .then(data => {
